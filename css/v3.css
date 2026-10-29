@@ -1,0 +1,66 @@
+/* V3 — authentic game artwork and board; layered over existing responsive layout. */
+:root{--gold:#f4c56a;--ink:#243127}
+.header-logo{display:block;height:66px;width:132px;max-width:100%;object-fit:contain;filter:drop-shadow(0 3px 2px #081b1370)}
+.wordmark{padding:0;min-width:135px;align-items:center}
+.nav-wrap{min-height:84px}
+.main-nav{gap:20px}
+.hero-scene{background-image:radial-gradient(circle at 76% 40%,#346b524b,transparent 47%),linear-gradient(118deg,#09251e 1%,#0c3527 57%,#174530 100%)}
+.hero-grid{padding-top:150px;padding-bottom:98px;align-items:center}
+.hero-logo-title{line-height:0!important;margin:6px 0 17px!important;max-width:520px}
+.hero-logo{display:block;max-width:100%;width:520px;height:auto;filter:drop-shadow(0 16px 14px #0005)}
+.hero-lead{margin-top:15px!important}
+.hero-display{align-self:center}
+.board-frame{background:#e9dbc2;border-color:#bd894f;box-shadow:0 30px 58px #00160f85;transform:rotate(1.2deg)}
+.board-frame img{aspect-ratio:2048/1448;object-fit:contain;background:#eadbc7}
+.board-caption{color:#f5dab0}
+.section-heading h2 em,.section h2 em{font-style:italic}
+.villain-art{height:235px;display:flex;align-items:end;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 80%,#fff5d6,#eaddbe 72%)}
+.villain-art img{height:100%;width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 5px 3px #352d2830)}
+.villain:hover .villain-art img{transform:translateY(-5px) scale(1.045)}
+.villain-cat .villain-art img{object-position:center bottom}
+.villain-yaga .villain-art{background:radial-gradient(circle at 50% 84%,#ffdac4,#f5ddbf 75%)}
+.villain-dragon .villain-art{background:radial-gradient(circle at 50% 84%,#d9eaf7,#d7e0df 75%)}
+.villain-leshy .villain-art{background:radial-gradient(circle at 50% 84%,#e0eec8,#d3e2bd 75%)}
+.villain-cat .villain-art{background:radial-gradient(circle at 50% 84%,#d9ecd9,#e3ddbc 75%)}
+.villain-body{min-height:190px}
+.villain h3{font-size:25px}
+.villains-grid .villain{border:1px solid #cfbea170}
+.step-symbol{line-height:1}
+.facts-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #d9c6a5;border-radius:15px;overflow:hidden;background:#fff9e8;box-shadow:0 10px 24px #3330180e}
+.facts-row>div{text-align:center;padding:20px 10px;display:flex;flex-direction:column;gap:1px}
+.facts-row>div+div{border-left:1px solid #e7d9bd}
+.facts-row strong{font:bold clamp(25px,3.7vw,42px)/1.1 Georgia,serif;color:#294939}
+.facts-row span{font-size:12px;color:#626f62}
+.gameplay-facts{background:#f2e6cd;padding-top:45px;padding-bottom:90px}
+.board-variants{display:grid;grid-template-columns:370px minmax(0,1fr);gap:35px;align-items:center;margin-top:60px}
+.board-variants h2{font:bold clamp(28px,3.2vw,43px)/1.11 Georgia,serif;margin:10px 0 17px}
+.board-variants p{font-size:14px;color:#616a60;line-height:1.7}
+.variant-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.variant-button{background:#fff7e8;color:#365345;border:1px solid #c7b799;padding:10px 12px;border-radius:10px;font-weight:bold;font-size:12px;cursor:pointer}
+.variant-button.active{background:#27543c;border-color:#27543c;color:white}
+.variant-button:focus-visible{outline:3px solid #d99136;outline-offset:3px}
+.variant-image{background:#e0cfb2;padding:8px;border:8px solid #bb935c;border-radius:14px;box-shadow:0 23px 32px #27240c36}
+.variant-image img{display:block;width:100%;height:auto;border-radius:3px}
+.rules-main{min-width:0}
+.mix-table{display:grid;gap:8px;margin-top:22px}
+.mix-table>div{display:grid;grid-template-columns:74px 1fr;gap:14px;padding:10px 14px;border-radius:9px;background:#f2ebda;font-size:13px;line-height:1.5}
+.mix-table strong{color:#935423}
+.aside-info+.aside-info{margin-top:12px}
+.difficulty-card{background:#f1e1be}
+.subject-tiles .subject-button{position:relative}
+.subject-button[data-subject="math"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_yaga.webp');background-position:center;background-size:cover}
+.subject-button[data-subject="rus"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_dragon.webp');background-position:center;background-size:cover}
+.subject-button[data-subject="world"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_leshy.webp');background-position:center;background-size:cover}
+.subject-button[data-subject="en"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_cat.webp');background-position:center;background-size:cover}
+.level-group{margin-bottom:20px;padding:18px;border-radius:12px;background:#fff9eb;border:1px solid #e4d5bc}
+.level-group-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 10px}
+.level-group-heading h3{margin:0;font:700 20px/1.3 Georgia,serif;color:#2b4737}
+.level-pill{border-radius:8px;background:#e9e7d9;border:1px solid #d8d4bf;padding:5px 9px;color:#565e52;font-size:12px;font-weight:bold}
+.level-group .q-item{background:#fffdf8;margin-bottom:10px}
+.level-group .q-item:last-child{margin-bottom:0}
+.level-group .q-topic{font-weight:bold}
+.level-empty{font-size:13px;color:#8a795c;margin:12px 0}
+@media(max-width:1050px){.board-variants{grid-template-columns:300px minmax(0,1fr)}.villain-art{height:195px}}
+@media(max-width:900px){.hero-grid{padding-top:135px;gap:34px}.hero-logo-title{margin:0 0 22px!important}.hero-logo{max-width:510px;margin:auto}.board-variants{grid-template-columns:1fr;gap:25px}.board-variants>div:first-child{max-width:600px}}
+@media(max-width:650px){.header-logo{width:112px;height:58px}.nav-wrap{min-height:70px}.hero-grid{padding-top:102px;padding-bottom:75px}.hero-logo{max-width:100%}.hero-lead{font-size:22px}.board-frame{transform:rotate(.5deg)}.villain-art{height:clamp(118px,36vw,184px)}.villain-body{min-height:190px}.villain h3{font-size:20px}.facts-row{grid-template-columns:repeat(2,1fr)}.facts-row>div{padding:16px 6px}.facts-row>div:nth-child(3){border-left:0;border-top:1px solid #e7d9bd}.facts-row>div:nth-child(4){border-top:1px solid #e7d9bd}.gameplay-facts{padding-bottom:60px}.board-variants{margin-top:45px}.mix-table>div{grid-template-columns:55px 1fr;gap:8px;font-size:11px;padding:10px}.level-group{padding:12px}.level-group-heading h3{font-size:16px}.level-pill{font-size:10px}}
+@media print{.level-group{padding:0;background:white;border:0;break-inside:auto}.level-group-heading{margin-top:18px;break-after:avoid}.level-group-heading h3{font-size:17px}.level-pill{font-size:11px}.level-group .q-item{margin:0;background:white}.level-empty{display:none}}

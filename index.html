@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#102c25">
   <meta name="description" content="Баба Яга против! — настольная игра, в которой дети спасают школу, отвечая на вопросы. Постоянный доступ к библиотеке заданий — вместе с игрой.">
   <title>Баба Яга против! — Настольная игра, где знания побеждают</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/v3.css">
 </head>
 <body>
 <header class="site-header" id="top">
   <div class="container nav-wrap">
-    <a href="index.html" class="wordmark" aria-label="Баба Яга против! — главная"><span class="brand-star">✦</span><span>Баба Яга <em>против!</em></span></a>
+    <a href="index.html" class="wordmark" aria-label="Баба Яга против! — главная"><img src="assets/logo.webp" alt="Баба Яга против!" class="header-logo" width="138" height="90"></a>
     <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню">☰</button>
     <nav id="site-nav" class="main-nav" aria-label="Основное меню">
       <a href="#about">Об игре</a><a href="#how">Как играть</a><a href="#library">Библиотека</a><a href="rules.html">Правила</a><a href="#buy">Где купить</a>
@@ -25,15 +25,15 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <div class="eyebrow"><span class="eyebrow-line"></span> НАСТОЛЬНОЕ ПРИКЛЮЧЕНИЕ ДЛЯ ШКОЛЬНИКОВ</div>
-        <h1>Баба Яга<br><span>против!</span></h1>
-        <p class="hero-lead">Знания — наше сокровище.</p>
-        <p class="hero-desc">Бросайте кубик, отвечайте на вопросы и спасайте школу от сказочных злодеев. Здесь учёба превращается в приключение, а победа зависит от всей команды.</p>
+        <h1 class="hero-logo-title"><img src="assets/logo.webp" alt="Баба Яга против!" class="hero-logo" width="800" height="550"></h1>
+        <p class="hero-lead">Спасите школу силой знаний!</p>
+        <p class="hero-desc">Бросайте кубик, отвечайте на вопросы и спасайте школу от сказочных злодеев. Детям нужно добраться до Волшебного сундука знаний раньше, чем злодеи достигнут школы. Играйте одной командой!</p>
         <div class="hero-actions"><a class="btn btn-gold" href="#about">Познакомиться с игрой <span>↗</span></a><a class="btn btn-outline-light" href="library.html">Получить вопросы <span>→</span></a></div>
         <div class="hero-note"><span class="circle-tick">✓</span><span>Без экранов во время игры <i>·</i> Вопросы можно обновлять</span></div>
       </div>
       <div class="hero-display">
-        <div class="board-frame"><img src="assets/board.webp" alt="Оригинальная иллюстрация игрового поля «Баба Яга против!»; игровые дорожки пока не нанесены" width="1536" height="1024"><span class="frame-corner corner-a"></span><span class="frame-corner corner-b"></span></div>
-        <div class="board-caption"><span class="sparkle">✧</span> Настоящее поле <span class="caption-rule"></span> <span>Дорожки ещё в разработке</span></div>
+        <div class="board-frame"><img src="assets/board.webp" alt="Авторский макет игрового поля с маршрутами, клетками персонажей и QR-кодом" width="2048" height="1448"><span class="frame-corner corner-a"></span><span class="frame-corner corner-b"></span></div>
+        <div class="board-caption"><span class="sparkle">✧</span> Макет поля <span class="caption-rule"></span> <span>Вариант с дорожками и QR</span></div>
       </div>
     </div>
     <div class="hero-bottom-ornament" aria-hidden="true"></div>
@@ -42,36 +42,36 @@
     <div class="container">
       <div class="section-heading center"><span class="section-kicker">В СКАЗКЕ — СВОИ ПРАВИЛА</span><h2>Четыре злодея.<br><em>Четыре предмета.</em></h2><p>У каждого сказочного противника — свой школьный предмет. Злодеи проверят ваши знания, но победить их можно вместе.</p></div>
       <div class="villains-grid">
-        <article class="villain villain-yaga"><div class="villain-art"><img src="assets/villain_yaga.webp" alt="Баба Яга со счётами — злодей по математике" loading="lazy" width="900" height="900"></div><div class="villain-body"><span class="villain-label">МАТЕМАТИКА</span><h3>Баба Яга</h3><p>Примеры и задачки. Её не так-то просто перехитрить!</p><span class="villain-id">01 / 04</span></div></article>
-        <article class="villain villain-dragon"><div class="villain-art"><img src="assets/villain_dragon.webp" alt="Трёхголовый Змей Горыныч на книгах русского языка" loading="lazy" width="900" height="900"></div><div class="villain-body"><span class="villain-label">РУССКИЙ ЯЗЫК</span><h3>Змей Горыныч</h3><p>Слова и правила — у каждой головы свой вопрос.</p><span class="villain-id">02 / 04</span></div></article>
-        <article class="villain villain-leshy"><div class="villain-art"><img src="assets/villain_leshy.webp" alt="Леший в лесу — злодей по окружающему миру" loading="lazy" width="900" height="900"></div><div class="villain-body"><span class="villain-label">ОКРУЖАЮЩИЙ МИР</span><h3>Леший</h3><p>Проверит, хорошо ли вы знаете природу и мир вокруг.</p><span class="villain-id">03 / 04</span></div></article>
-        <article class="villain villain-cat"><div class="villain-art"><img src="assets/villain_cat.webp" alt="Кот Баюн на ветке со словами на английском языке" loading="lazy" width="900" height="1125"></div><div class="villain-body"><span class="villain-label">АНГЛИЙСКИЙ ЯЗЫК</span><h3>Кот Баюн</h3><p>Заговорит по-английски. Сумеете ему ответить?</p><span class="villain-id">04 / 04</span></div></article>
+        <article class="villain villain-yaga"><div class="villain-art"><img src="assets/villain_yaga.webp" alt="Баба Яга — злодей по математике" loading="lazy" width="900" height="900"></div><div class="villain-body"><span class="villain-label">МАТЕМАТИКА</span><h3>Баба Яга</h3><p>Примеры и задачки. Её не так-то просто перехитрить!</p><span class="villain-id">01 / 04</span></div></article>
+        <article class="villain villain-dragon"><div class="villain-art"><img src="assets/villain_dragon.webp" alt="Трёхголовый Змей Горыныч — злодей по русскому языку" loading="lazy" width="900" height="900"></div><div class="villain-body"><span class="villain-label">РУССКИЙ ЯЗЫК</span><h3>Змей Горыныч</h3><p>Три головы, множество вопросов про слова и правила.</p><span class="villain-id">02 / 04</span></div></article>
+        <article class="villain villain-leshy"><div class="villain-art"><img src="assets/villain_leshy.webp" alt="Леший — злодей по окружающему миру" loading="lazy" width="900" height="900"></div><div class="villain-body"><span class="villain-label">ОКРУЖАЮЩИЙ МИР</span><h3>Леший</h3><p>Проверит, хорошо ли вы знаете природу и мир вокруг.</p><span class="villain-id">03 / 04</span></div></article>
+        <article class="villain villain-cat"><div class="villain-art"><img src="assets/villain_cat.webp" alt="Кот учёный — злодей по английскому языку" loading="lazy" width="900" height="1125"></div><div class="villain-body"><span class="villain-label">АНГЛИЙСКИЙ ЯЗЫК</span><h3>Кот учёный</h3><p>Хитрые английские слова и переводы.</p><span class="villain-id">04 / 04</span></div></article>
       </div>
     </div>
   </section>
   <section class="section forest-mid" id="how">
     <div class="container">
-      <div class="how-heading"><div><span class="section-kicker kicker-amber">ПРОСТО НАЧАТЬ</span><h2>Как проходит<br><em>приключение</em></h2></div><p>В основе игры — поле, кубик, вопросы и общая цель. Без знаний и взаимовыручки до сокровища не добраться. Маршруты на поле пока проектируются.</p></div>
+      <div class="how-heading"><div><span class="section-kicker kicker-amber">ПРОСТО НАЧАТЬ</span><h2>Как проходит<br><em>приключение</em></h2></div><p>В игре участвуют от 2 до 22 игроков. Чтобы победить, все оставшиеся в игре дети должны добраться до Волшебного сундука знаний.</p></div>
       <div class="steps-grid">
-        <article class="step-card"><span class="step-num">01</span><div class="step-symbol">⚄</div><h3>Бросьте кубик</h3><p>Игрок перемещается по клеткам поля и встречает нового сказочного противника.</p></article>
-        <article class="step-card"><span class="step-num">02</span><div class="step-symbol">?</div><h3>Ответьте на вопрос</h3><p>Задание зависит от злодея, а сложность определяется по правилам игры.</p></article>
-        <article class="step-card"><span class="step-num">03</span><div class="step-symbol">★</div><h3>Спасите школу</h3><p>Правильные ответы отбрасывают злодеев назад. Ваша общая задача — добраться до сокровища раньше них.</p></article>
+        <article class="step-card"><span class="step-num">01</span><div class="step-symbol">⚄</div><h3>Бросьте кубик</h3><p>Ребёнок передвигает фишку по игровому полю на выпавшее число клеток.</p></article>
+        <article class="step-card"><span class="step-num">02</span><div class="step-symbol">?</div><h3>Ответьте на вопрос</h3><p>Злодей задаёт вопрос по своему предмету. Сложность определяет его бросок: 1–2, 3–4 или 5–6.</p></article>
+        <article class="step-card"><span class="step-num">03</span><div class="step-symbol">★</div><h3>Доберитесь до сундука</h3><p>Верный ответ отбрасывает злодея назад, ошибка приближает его к школе.</p></article>
       </div>
       <div class="read-rules"><span>Хотите узнать о ходах и победе подробнее?</span><a href="rules.html">Краткие правила игры <span>↗</span></a></div>
     </div>
   </section>
   <section class="section library-promo" id="library">
     <div class="container promo-grid">
-      <div class="promo-content"><span class="section-kicker">ВМЕСТЕ С ИГРОЙ</span><h2>Новые вопросы.<br><em>Новые приключения.</em></h2><p>Не нужно каждый раз придумывать задания с нуля. Выберите класс и предмет — библиотека случайным образом соберёт вопросы по разным темам.</p><ul class="feature-list"><li><span>✓</span>Классы с 1-го по 4-й и четыре предмета</li><li><span>✓</span>Основные вопросы и материалы преподавателей отдельно</li><li><span>✓</span>Собственные <strong>личные</strong> вопросы — только для вас</li><li><span>✓</span>Печать вопросов и ответов без приложения</li></ul><a class="btn btn-forest" href="library.html">Перейти в библиотеку <span>↗</span></a><p class="small-muted">Постоянный доступ по коду с игрового поля. Библиотека сейчас в стадии прототипа.</p></div>
+      <div class="promo-content"><span class="section-kicker">ВМЕСТЕ С ИГРОЙ</span><h2>Новые вопросы.<br><em>Новые приключения.</em></h2><p>Не нужно каждый раз придумывать задания с нуля. Выберите класс и предмет — библиотека случайным образом соберёт вопросы по разным темам.</p><ul class="feature-list"><li><span>✓</span>Классы с 1-го по 4-й, четыре предмета и три уровня сложности</li><li><span>✓</span>Основные вопросы и материалы преподавателей отдельно</li><li><span>✓</span>Собственные <strong>личные</strong> вопросы — только для вас</li><li><span>✓</span>Печать вопросов и ответов без приложения</li></ul><a class="btn btn-forest" href="library.html">Перейти в библиотеку <span>↗</span></a><p class="small-muted">Постоянный доступ по коду с игрового поля. Пока работает демонстрационная версия.</p></div>
       <div class="promo-visual" aria-label="Пример интерфейса библиотеки">
         <div class="mock-browser"><div class="browser-bar"><div class="browser-dots"><i></i><i></i><i></i></div><span>Библиотека вопросов</span><span>✳</span></div><div class="mock-body"><div class="mock-head"><span class="mock-kicker">ВАШЕ ПРИКЛЮЧЕНИЕ</span><h3>Соберите вопросы для игры</h3><p>Пара кликов — и вопросы готовы к печати.</p></div><div class="mock-label">КЛАСС</div><div class="mock-pills"><span>1</span><span>2</span><span class="active">3</span><span>4</span></div><div class="mock-label">ПРЕДМЕТ</div><div class="mock-subject"><span class="mock-mark">✦</span> Математика <span>⌄</span></div><div class="mock-label">ИСТОЧНИК</div><div class="mock-sources"><span class="active">Основная</span><span>Преподаватели</span><span>Личная</span></div><div class="mock-cta">↝ &nbsp;Сформировать вопросы</div></div></div>
         <div class="mock-floating"><span>✦</span><div><strong>Вопросы готовы!</strong><small>Останется распечатать</small></div></div>
       </div>
     </div>
   </section>
-  <section class="section access-section"><div class="container access-panel"><div class="access-icon">⌘</div><div><span class="section-kicker kicker-amber">ДОСТУП НАВСЕГДА</span><h2>Код уже в вашей игре</h2><p>На игровом поле будет указан код для входа в библиотеку. Никакой подписки или ежегодной платы. Купили игру — пользуетесь материалами.</p></div><a class="btn btn-gold" href="library.html">Открыть библиотеку <span>↗</span></a></div></section>
-  <section class="section buy-section" id="buy"><div class="container buy-grid"><div class="buy-photo"><img src="assets/board.webp" alt="Иллюстрация игрового поля настольной игры «Баба Яга против!»" loading="eager"><span>Игровое поле · маршруты пока не нанесены</span></div><div class="buy-copy"><span class="section-kicker">СКОРО В ПРОДАЖЕ</span><h2>Приключение<br>начинается <em>здесь.</em></h2><p>Мы готовим настольную игру к выпуску. Когда появятся карточки товара на маркетплейсах, ссылки будут здесь.</p><div class="buy-options"><div class="buy-option"><span class="store-logo ozon">OZON</span><span>Ссылка появится после публикации</span><span class="soon-chip">Скоро</span></div><div class="buy-option"><span class="store-logo wild">WB</span><span>Ссылка появится после публикации</span><span class="soon-chip">Скоро</span></div></div><p class="small-muted">Мы не принимаем оплату на этом сайте.</p></div></div></section>
-</main>
-<footer class="footer"><div class="container footer-grid"><div><a href="index.html" class="wordmark footer-mark"><span class="brand-star">✦</span><span>Баба Яга <em>против!</em></span></a><p>Сказочное приключение, в котором знания помогают победить.</p></div><nav aria-label="Ссылки внизу страницы"><a href="#about">Об игре</a><a href="rules.html">Правила</a><a href="library.html">Библиотека</a><a href="#buy">Где купить</a></nav></div><div class="container footer-bottom"><span>© «Баба Яга против!» · Прототип сайта</span><a href="#top">Наверх ↑</a></div></footer>
-<script src="js/common.js"></script>
+  <section class="section access-section"><div class="container access-panel"><div class="access-icon">⌘</div><div><span class="section-kicker kicker-amber">ДОСТУП НАВСЕГДА</span><h2>Код уже в вашей игре</h2><p>На игровом поле предусмотрен код для входа в библиотеку. Никакой подписки или ежегодной платы. Купили игру — пользуетесь материалами.</p></div><a class="btn btn-gold" href="library.html">Открыть библиотеку <span>↗</span></a></div></section>
+  <section class="section buy-section" id="buy"><div class="container buy-grid"><div class="buy-photo"><img src="assets/board.webp" alt="Авторский макет поля с маршрутами и QR-кодом" loading="lazy"><span>Макет игрового поля · один из вариантов</span></div><div class="buy-copy"><span class="section-kicker">СКОРО В ПРОДАЖЕ</span><h2>Приключение<br>начинается <em>здесь.</em></h2><p>Мы готовим настольную игру к выпуску. Когда появятся карточки товара на маркетплейсах, ссылки будут здесь.</p><div class="buy-options"><div class="buy-option"><span class="store-logo ozon">OZON</span><span>Ссылка появится после публикации</span><span class="soon-chip">Скоро</span></div><div class="buy-option"><span class="store-logo wild">WB</span><span>Ссылка появится после публикации</span><span class="soon-chip">Скоро</span></div></div><p class="small-muted">Мы не принимаем оплату на этом сайте.</p></div></div></section>
+<section class="section gameplay-facts"><div class="container"><div class="facts-row"><div><strong>1–4</strong><span>классы</span></div><div><strong>2–22</strong><span>игрока</span></div><div><strong>4</strong><span>сказочных злодея</span></div><div><strong>3</strong><span>уровня вопросов</span></div></div><div class="board-variants"><div><span class="section-kicker">МАТЕРИАЛЫ ИГРЫ</span><h2>Посмотреть игровое поле</h2><p>Оба присланных варианта поля сохранены: с QR-кодом и без линий разреза. Здесь показан макет, а не обещание окончательной печатной версии.</p><div class="variant-buttons"><button class="variant-button active" type="button" data-board="assets/board.webp">Без линий разреза</button><button class="variant-button" type="button" data-board="assets/board_alternative.webp">Второй вариант с QR</button></div></div><div class="variant-image"><img id="board-variant-image" src="assets/board.webp" alt="Макет игрового поля с маршрутами и QR" loading="lazy"></div></div></div></section></main>
+<footer class="footer"><div class="container footer-grid"><div><a href="index.html" class="wordmark footer-mark"><img src="assets/logo.webp" alt="Баба Яга против!" class="header-logo" width="138" height="90"></a><p>Сказочное приключение, в котором знания помогают победить.</p></div><nav aria-label="Ссылки внизу страницы"><a href="#about">Об игре</a><a href="rules.html">Правила</a><a href="library.html">Библиотека</a><a href="#buy">Где купить</a></nav></div><div class="container footer-bottom"><span>© «Баба Яга против!» · Прототип V3</span><a href="#top">Наверх ↑</a></div></footer>
+<script src="js/common.js"></script><script src="js/home.js"></script>
 </body></html>

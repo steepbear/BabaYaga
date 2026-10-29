@@ -1,0 +1,1 @@
+(()=>{const board=document.getElementById('board-variant-image');if(!board)return;document.querySelectorAll('[data-board]').forEach(b=>b.addEventListener('click',()=>{board.src=b.dataset.board;document.querySelectorAll('[data-board]').forEach(x=>x.classList.toggle('active',x===b));}));})();
