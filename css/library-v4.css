@@ -29,4 +29,74 @@
 .library-page button:focus-visible,.library-page a:focus-visible,.library-page input:focus-visible,.library-page select:focus-visible{outline:3px solid #d5aa56;outline-offset:3px}
 .subject-button:focus-visible{outline-offset:3px}
 @media(max-width:650px){.gate-entry{flex-direction:column}.gate-entry .btn{width:100%}.library-gate .gate-title{gap:10px}.level-legend span{font-size:11px}.result-actions .btn{flex:1}.library-gate{padding:22px}.access-success{flex-wrap:wrap}.access-success button{margin-left:0}}
-@media print{.library-gate,.answer-toggle,.level-legend{display:none!important}.print-result{display:block!important}.result-meta{display:none!important}.print-head{display:block!important}.print-answers{page-break-before:always;break-before:page}}
+@media print{.library-gate,.answer-toggle,.level-legend{display:none!important}.print-result{display:block!important}.result-meta{display:none!important}.print-head{display:block!important}}
+
+
+/* V5: карточки предметов — персонажи на фоне без дополнительных значков */
+.library-page .subject-tiles .subject-button{
+  position:relative;min-height:96px;gap:2px;line-height:1.5;
+  background-size:cover;background-position:center 42%;
+  font-size:12px;font-weight:800;color:#294736;
+  text-shadow:0 1px 0 #fffcf6,0 0 8px #fffdf9;
+}
+.library-page .subject-button[data-subject="math"]{
+  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_yaga.webp')
+}
+.library-page .subject-button[data-subject="russian"]{
+  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_dragon.webp')
+}
+.library-page .subject-button[data-subject="world"]{
+  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_leshy.webp')
+}
+.library-page .subject-button[data-subject="english"]{
+  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_cat.webp')
+}
+.library-page .subject-button.active{
+  border:2px solid #245543;
+  box-shadow:inset 0 0 0 1px #245543,0 0 0 2px #24554314
+}
+/* Цвета сложности одинаковы в легенде, заголовках групп и печати */
+.level-legend span{border:1px solid transparent;padding:9px 12px}
+.level-legend .difficulty-1,.level-group[data-level="1"] .level-pill{
+  background:#e4f1e2;color:#315b3c;border-color:#bbd7bd
+}
+.level-legend .difficulty-2,.level-group[data-level="2"] .level-pill{
+  background:#fff0da;color:#8b581e;border-color:#efd1a0
+}
+.level-legend .difficulty-3,.level-group[data-level="3"] .level-pill{
+  background:#f9e3e1;color:#993d3d;border-color:#eabbba
+}
+.level-group[data-level="1"]{border-left:4px solid #93c7a0}
+.level-group[data-level="2"]{border-left:4px solid #e9bb71}
+.level-group[data-level="3"]{border-left:4px solid #df9a97}
+.level-group[data-level="1"] .level-group-heading h3{color:#315b3c}
+.level-group[data-level="2"] .level-group-heading h3{color:#8b581e}
+.level-group[data-level="3"] .level-group-heading h3{color:#993d3d}
+/* Отметки, какие вопросы ведущий уже использовал */
+.asked-progress{display:inline-block;margin-left:8px;padding:6px 12px;border-radius:30px;background:#e7f0e5;color:#326144;font-size:12px;font-weight:800}
+.asked-hint{font-size:12px;color:#657469;line-height:1.65;margin:-5px 0 20px}
+.q-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.question-mark{display:inline-flex;align-items:center;gap:7px;margin-left:auto;padding:5px 10px;border:1px solid #ccdcca;border-radius:7px;background:#f4f8f0;color:#3b5a41;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.question-mark input{width:17px;height:17px;margin:0;accent-color:#39744f;cursor:pointer}
+.q-item.is-asked{background:#eef4e9;border-color:#bbd5c1}
+.q-item.is-asked .question-mark{background:#d5ead6;border-color:#a1cba9}
+.q-item.is-asked .q-number{color:#36734c}
+.print-inline-answer,.print-question-mark{display:none}
+@media(max-width:650px){
+  .library-page .subject-tiles .subject-button{min-height:102px;font-size:11px}
+  .asked-progress{display:block;margin:8px 0 0;width:max-content}
+  .q-top .question-mark{margin-left:0}
+}
+@media print{
+  /* Печать карточек на планшеты: ответ рядом с вопросом, без отдельного листа */
+  .library-page .print-inline-answer{display:block!important;margin-top:8px;padding-top:7px;border-top:1px dotted #bbb;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .library-page .print-question-mark{display:inline-block!important;margin-left:auto;white-space:nowrap;font-size:12px;color:#222}
+  .library-page .answer-toggle,.library-page .question-mark,.library-page .asked-hint,.library-page .asked-progress,.library-page .result-meta{display:none!important}
+  .library-page .level-group{border-left:3px solid #777;padding-left:10px}
+  .library-page .level-group[data-level="1"]{border-left-color:#85b18e}
+  .library-page .level-group[data-level="2"]{border-left-color:#d4a35f}
+  .library-page .level-group[data-level="3"]{border-left-color:#c78080}
+  .library-page .q-item{break-inside:avoid;page-break-inside:avoid}
+  .library-page .q-item.is-asked{background:white!important}
+  .library-page .q-top{display:flex!important}
+}

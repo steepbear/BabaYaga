@@ -49,9 +49,9 @@
 .difficulty-card{background:#f1e1be}
 .subject-tiles .subject-button{position:relative}
 .subject-button[data-subject="math"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_yaga.webp');background-position:center;background-size:cover}
-.subject-button[data-subject="rus"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_dragon.webp');background-position:center;background-size:cover}
+.subject-button[data-subject="russian"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_dragon.webp');background-position:center;background-size:cover}
 .subject-button[data-subject="world"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_leshy.webp');background-position:center;background-size:cover}
-.subject-button[data-subject="en"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_cat.webp');background-position:center;background-size:cover}
+.subject-button[data-subject="english"]{background-image:linear-gradient(#fffefaee,#fffefaee),url('../assets/villain_cat.webp');background-position:center;background-size:cover}
 .level-group{margin-bottom:20px;padding:18px;border-radius:12px;background:#fff9eb;border:1px solid #e4d5bc}
 .level-group-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 10px}
 .level-group-heading h3{margin:0;font:700 20px/1.3 Georgia,serif;color:#2b4737}

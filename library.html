@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#102c25"><meta name="description" content="Библиотека вопросов для настольной игры «Баба Яга против!». Основные, общие и личные материалы преподавателей."><title>Библиотека вопросов — Баба Яга против!</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/v3.css"><link rel="stylesheet" href="css/library-v4.css"></head>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#102c25"><meta name="description" content="Библиотека редакционных вопросов для школьного проекта «Баба Яга против!». Подборка и печать вопросов с ответами, отметки уже заданных вопросов."><title>Библиотека вопросов — Баба Яга против!</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/v3.css"><link rel="stylesheet" href="css/library-v4.css"></head>
 <body class="library-page">
 <header class="site-header"><div class="container nav-wrap"><a href="index.html" class="wordmark"><img src="assets/logo.webp" alt="Баба Яга против!" class="header-logo" width="138" height="90"></a><button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню">☰</button><nav class="main-nav" id="site-nav"><a href="index.html#about">Об игре</a><a href="index.html#how">Как играть</a><a href="library.html" aria-current="page">Библиотека</a><a href="rules.html">Правила</a><a href="index.html#project">О проекте</a><a class="nav-button" href="index.html">На главную ↗</a></nav></div></header>
 <main><section class="library-hero"><div class="container"><span class="section-kicker kicker-amber">ВОПРОСЫ ДЛЯ ВАШЕЙ ИГРЫ</span><h1>Библиотека <em>знаний</em></h1><p>Введите код с игрового поля, выберите класс и предмет. Получите вопросы трёх уровней сложности и распечатайте набор для игры.</p></div></section>
@@ -29,24 +29,24 @@
   <div class="field"><label for="grade-select">Класс</label><select id="grade-select"><option value="1">1 класс — скоро</option><option value="2" selected>2 класс</option><option value="3">3 класс — скоро</option><option value="4">4 класс — скоро</option></select></div>
   <div class="field" style="margin-top:22px"><span class="field-title">Предмет и злодей</span>
    <div class="subject-tiles" role="group" aria-label="Предмет">
-    <button class="subject-button active" data-subject="math" type="button" aria-pressed="true"><strong>✦</strong> Математика<br>Баба Яга</button>
-    <button class="subject-button" data-subject="russian" type="button" aria-pressed="false"><strong>Ж</strong> Русский язык<br>Змей Горыныч</button>
-    <button class="subject-button" data-subject="world" type="button" aria-pressed="false"><strong>❧</strong> Окружающий мир<br>Леший</button>
-    <button class="subject-button" data-subject="english" type="button" aria-pressed="false"><strong>Aa</strong> Английский язык<br>Кот учёный</button>
+    <button class="subject-button active" data-subject="math" type="button" aria-pressed="true">Математика<br>Баба Яга</button>
+    <button class="subject-button" data-subject="russian" type="button" aria-pressed="false">Русский язык<br>Змей Горыныч</button>
+    <button class="subject-button" data-subject="world" type="button" aria-pressed="false">Окружающий мир<br>Леший</button>
+    <button class="subject-button" data-subject="english" type="button" aria-pressed="false">Английский язык<br>Кот учёный</button>
    </div>
   </div>
-  <div class="level-legend" aria-label="Сложности по броску кубика"><span>Кубик 1–2 — лёгкий</span><span>3–4 — обычный</span><span>5–6 — сложный</span></div>
+  <div class="level-legend" aria-label="Сложность вопросов"><span class="difficulty-1">Кубик 1–2 — <strong>Лёгкий</strong></span><span class="difficulty-2">Кубик 3–4 — <strong>Обычный</strong></span><span class="difficulty-3">Кубик 5–6 — <strong>Сложный</strong></span></div>
   <div class="generator-actions"><div class="field"><label for="count-select">Вопросов на каждый уровень</label><select id="count-select"><option value="2" selected>2 (всего 6)</option><option value="4">4 (всего 12)</option><option value="6">6 (всего 18)</option><option value="10">10 (всего 30)</option></select></div><div><button id="generate-btn" type="button" class="btn btn-forest">↝ &nbsp; Сформировать набор</button></div></div>
   <p class="muted-info">На каждом уровне вопросы выбираются случайно из редакционной библиотеки, темы перемешиваются.</p>
   <p id="generate-message" class="notice-error" role="status" aria-live="polite"></p>
  </section>
  <section class="panel section-card print-result" id="results" hidden>
-  <div class="result-meta no-print"><div><h2>Ваш набор вопросов</h2><span id="result-count" class="counter-tag">Набор не сформирован</span></div>
-   <div class="result-actions"><button id="reshuffle-btn" class="btn btn-outline-dark btn-small" type="button">↻ Другие вопросы</button><button id="toggle-answers" class="btn btn-outline-dark btn-small" type="button">Показать ответы</button><button id="print-btn" class="btn btn-forest btn-small" type="button">▣ Печать / PDF</button></div>
+  <div class="result-meta no-print"><div><h2>Ваш набор вопросов</h2><span id="result-count" class="counter-tag">Набор не сформирован</span><span id="asked-progress" class="asked-progress" role="status" aria-live="polite">Задано: 0 из 0</span></div>
+   <div class="result-actions"><button id="reshuffle-btn" class="btn btn-outline-dark btn-small" type="button">↻ Другие вопросы</button><button id="reset-asked" class="btn btn-outline-dark btn-small" type="button" title="Сбросить отметки, оставив вопросы">↺ Новая игра</button><button id="toggle-answers" class="btn btn-outline-dark btn-small" type="button">Показать ответы</button><button id="print-btn" class="btn btn-forest btn-small" type="button">▣ Печать / PDF</button></div>
   </div>
-  <div class="print-head print-only"><h2>Баба Яга против! — вопросы для игры</h2><p id="print-subtitle"></p><div class="print-note">Вопросы участникам. Ответы для ведущего находятся на отдельной странице.</div></div>
+  <p class="asked-hint no-print">Отмечайте «Вопрос задан» по ходу игры. Отметки сохраняются при обновлении страницы; «Новая игра» очищает их.</p><div class="print-head print-only"><h2>Баба Яга против! — вопросы для ведущего</h2><p id="print-subtitle"></p><div class="print-note">Вопросы и ответы напечатаны вместе. Квадратик «Задан» можно отмечать по ходу игры.</div></div>
   <div id="question-output" class="question-list"></div>
-  <div class="print-answers print-only"><h3>Ответы для ведущего</h3><ol id="print-answer-list"></ol></div>
+  
  </section>
 </div></div></section></main>
 <footer class="footer"><div class="container footer-bottom"><span>© «Баба Яга против!» · Школьный образовательный проект</span><a href="index.html">На главную ↗</a></div></footer>
