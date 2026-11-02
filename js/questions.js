@@ -48,13 +48,12 @@ async function signup(event){
  busy(true);status('#auth-status','');
  try{
   const {data,error}=await db.auth.signUp({
-   email:$('#signup-email').value.trim(),password,
-   options:{emailRedirectTo:'https://steepbear.github.io/BabaYaga/questions.html'}
+   email:$('#signup-email').value.trim(),password
   });
   if(error)throw error;
   $('#signup-password').value='';
   if(data.session){await loadUser();status('#auth-status','Регистрация завершена. Можно добавлять вопросы.')}
-  else{status('#auth-status','Проверьте почту: для завершения регистрации откройте письмо и подтвердите email. После подтверждения вернитесь сюда.');}
+  else{status('#auth-status','Регистрация создана, но вход пока недоступен. В настройках Supabase Authentication нужно отключить Confirm email.',true);}
  }catch(error){status('#auth-status',fail(error),true)}
  finally{busy(false)}
 }
