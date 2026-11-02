@@ -1,0 +1,66 @@
+/* Кабинет преподавателя. Совместим с основным оформлением сайта. */
+[hidden]{display:none!important}
+.questions-hero{padding:150px 0 58px;color:#fcf5e5;background:radial-gradient(circle at 88% 18%,#2d5841,transparent 45%),#102e25}
+.questions-hero h1{font:700 clamp(38px,5vw,62px)/1.1 Georgia,serif;margin:18px 0;color:#f8f3e7}
+.questions-hero h1 em{color:#f2d19a}
+.questions-hero p{max-width:650px;color:#d9e4d8;font-size:15px;line-height:1.8}
+.questions-layout{display:grid;grid-template-columns:225px minmax(0,1fr);gap:24px;padding:38px 0 70px;align-items:start}
+.questions-sidebar{display:grid;gap:15px}
+.q-panel{background:#fffdfa;border:1px solid #dedacd;box-shadow:0 10px 32px #132c2411;border-radius:14px;padding:27px}
+.questions-nav{padding:14px}
+.questions-nav .side-title{font-size:11px;font-weight:800;letter-spacing:1.3px;color:#7e7865;margin:10px 12px 14px}
+.questions-nav .side-link{display:flex;gap:12px;align-items:center;padding:12px;border-radius:8px;font-size:13px;color:#526656;font-weight:700}
+.questions-nav .side-link.active{background:#e8f1e8;color:#19432d}
+.questions-nav .side-icon{width:22px;text-align:center;font-size:18px}
+.questions-help{font-size:12px;line-height:1.7;color:#69786b}
+.questions-help strong{color:#294635}.questions-help p{margin:8px 0 0}
+.questions-content{min-width:0;display:grid;gap:20px}
+.q-section-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px}
+.q-section-heading h2{font:bold 30px/1.25 Georgia,serif;color:#263d2f;margin:0 0 7px}
+.q-sub{font-size:13px;color:#758076;margin:0}
+.auth-tabs{display:flex;border-bottom:1px solid #e0dfd4;gap:9px;margin:3px 0 23px}
+.auth-tab{background:transparent;border:0;border-bottom:3px solid transparent;color:#69746b;font-weight:800;padding:10px 15px;cursor:pointer}
+.auth-tab.active{color:#21543b;border-bottom-color:#21543b}
+.auth-form{display:grid;gap:15px;max-width:420px}
+.auth-form label,.q-form-grid label,.q-full{display:grid;gap:7px;font-size:12px;font-weight:800;color:#465e4c}
+.auth-form input,.q-form-grid input,.q-form-grid select,.q-full textarea{width:100%;box-sizing:border-box;background:#fffefa;border:1px solid #d4d9cb;border-radius:9px;padding:12px 13px;min-height:47px;color:#233d2d;font:14px/1.45 Arial,sans-serif}
+.q-full textarea{min-height:86px;resize:vertical}
+.auth-form input:focus-visible,.q-form-grid :is(input,select):focus-visible,.q-full textarea:focus-visible{outline:3px solid #c6dabb;outline-offset:1px}
+.q-btn{border:1px solid transparent;border-radius:9px;padding:12px 17px;font-size:13px;font-weight:800;cursor:pointer;min-height:43px}
+.q-btn-primary{background:#153d2f;color:#fff}
+.q-btn-primary:hover{background:#2a5a43}
+.q-btn-outline{background:#fffefa;color:#234734;border-color:#d0c7b1}
+.q-btn:disabled{opacity:.65;cursor:wait}
+.auth-hint,.q-muted{font-size:12px;line-height:1.65;color:#79857b}
+.q-status{margin:10px 0 0;font-size:13px;font-weight:700;min-height:0;color:#345f46;overflow-wrap:anywhere}
+.q-status.error{color:#a34635}.q-status:empty{display:none}
+.teacher-logged-in{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 14px;background:#e7f2e5;border-radius:8px;font-size:13px;color:#315640}
+.teacher-indicator{font-weight:900;margin-right:7px;color:#2b7a3b}
+.q-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:19px}
+.q-optional{font-weight:400;text-transform:none;color:#889189}
+.q-full{margin:0 0 19px}
+.visibility-choice{border:1px solid #e5e0d2;padding:12px;border-radius:11px;display:grid;gap:10px;margin:0 0 19px;min-width:0}
+.visibility-choice legend{font-size:12px;font-weight:800;color:#3c5844;padding:0 5px}
+.visibility-option{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:9px;background:#f8f7f0;cursor:pointer}
+.visibility-option input{margin-top:3px;accent-color:#286344}
+.visibility-option span{display:grid;gap:3px}
+.visibility-option strong{font-size:13px}.visibility-option small{font-size:12px;color:#697a6d}
+.editor-actions{display:flex;gap:9px;flex-wrap:wrap}
+.my-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:17px}
+.my-filter-btn{background:#f7f6ee;border:1px solid #dbd9ce;padding:9px 12px;border-radius:8px;font-weight:800;font-size:12px;color:#526657;cursor:pointer}
+.my-filter-btn.active{background:#285742;color:white;border-color:#285742}
+.my-question-items{display:grid;gap:11px}
+.my-question-card{border:1px solid #e1e0d5;background:#fffefa;border-radius:10px;padding:16px}
+.my-question-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;color:#778074;font-weight:700;margin-bottom:9px}
+.my-kind{border-radius:25px;padding:4px 9px;background:#ecf2e7;color:#356644;font-weight:800}
+.my-kind.community{background:#fff1d7;color:#8b581d}
+.my-question-card h3{font:bold 16px/1.4 Georgia,serif;color:#253c30;margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}
+.my-answer{font-size:13px;color:#4e6554;white-space:pre-wrap;overflow-wrap:anywhere}
+.my-topic{font-size:12px;color:#849285;margin-bottom:8px}
+.my-question-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.my-question-actions button{padding:8px 11px;border-radius:7px;border:1px solid #d1d5c8;background:#fff;font-size:12px;font-weight:700;cursor:pointer;color:#26553c}
+.my-question-actions .delete-question{color:#9c493a;border-color:#ecd3c8}
+.question-editor-page button:focus-visible,.question-editor-page a:focus-visible{outline:3px solid #e5b65e;outline-offset:2px}
+@media(max-width:900px){.questions-layout{grid-template-columns:1fr}.questions-sidebar{grid-template-columns:1fr 1fr}.questions-nav .side-link{font-size:12px}}
+@media(max-width:650px){.questions-hero{padding:112px 0 40px}.questions-layout{padding:25px 0 50px}.questions-sidebar{grid-template-columns:1fr}.questions-help{display:none}.q-panel{padding:19px}.questions-nav{padding:10px}.q-form-grid{grid-template-columns:1fr;gap:14px}.q-section-heading{flex-wrap:wrap}.q-section-heading h2{font-size:26px}.teacher-logged-in{flex-wrap:wrap}}
+@media print{.site-header,.questions-sidebar,.teacher-logged-in,.q-auth-panel,.q-editor-panel,.footer{display:none!important}}

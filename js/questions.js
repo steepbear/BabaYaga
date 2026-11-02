@@ -1,61 +1,193 @@
-/* Только иллюстративные вопросы для проверки интерфейса. Не редакционная база. */
-(function(){
-const raw={
- math:{
-  1:[['Сложение',1,'Сколько будет 6 + 3?','9'],['Вычитание',1,'Сколько будет 10 − 4?','6'],['Сравнение',1,'Какое число больше: 12 или 17?','17'],['Геометрия',2,'Сколько углов у квадрата?','4'],['Последовательности',2,'Продолжи ряд: 2, 4, 6, ...','8'],['Задача',2,'У Маши 5 яблок, ей дали ещё 4. Сколько стало яблок?','9']],
-  2:[['Умножение',1,'Сколько будет 7 × 3?','21'],['Вычитание',2,'Вычисли: 48 − 19.','29'],['Единицы длины',1,'Сколько сантиметров в одном метре?','100'],['Геометрия',2,'Сколько сторон у треугольника?','3'],['Время',2,'Сколько минут в двух часах?','120'],['Деление',2,'Сколько будет 60 : 10?','6']],
-  3:[['Умножение',1,'Сколько будет 8 × 7?','56'],['Деление',1,'Сколько будет 72 : 9?','8'],['Порядок действий',2,'Вычисли: 3 × (12 + 4).','48'],['Периметр',2,'Прямоугольник имеет стороны 6 см и 4 см. Найди его периметр.','20 см'],['Сложение',1,'Вычисли: 250 + 175.','425'],['Единицы длины',1,'Сколько метров в одном километре?','1000'],['Задача',3,'В 4 коробках по 9 карандашей. 7 карандашей раздали. Сколько осталось?','29']],
-  4:[['Умножение',1,'Вычисли: 125 × 4.','500'],['Деление',2,'Вычисли: 960 : 8.','120'],['Доли',2,'Чему равны три четверти от 20?','15'],['Площадь',2,'Найди площадь прямоугольника со сторонами 9 см и 7 см.','63 см²'],['Время',3,'Сколько минут в 3 часах 25 минутах?','205'],['Единицы длины',2,'Сколько метров в 2 км 50 м?','2050']]
- },
- rus:{
-  1:[['Слоги',1,'Сколько слогов в слове «малина»?','3'],['Буквы',1,'Какая первая буква в слове «лиса»?','Л'],['Гласные',1,'Назови гласный звук в слове «дом».','[о]'],['Предложение',2,'С какой буквы пишется первое слово предложения?','С заглавной'],['Слова',1,'Сколько букв в слове «кот»?','3'],['Имена собственные',2,'С какой буквы пишется имя человека?','С заглавной']],
-  2:[['Части речи',1,'Что обозначает имя существительное?','Предмет (в школьном понимании: отвечает на вопросы кто? что?)'],['Части речи',2,'Какой вопрос можно задать к слову «зелёный»?','Какой?'],['Орфография',2,'Подбери проверочное слово к слову «грибы» для безударной гласной в корне.','Гриб'],['Число',1,'Поставь слово «стол» во множественное число.','Столы'],['Предложение',1,'Какой знак ставится в конце вопросительного предложения?','?'],['Состав слова',2,'Найди корень в слове «лесник».','лес']],
-  3:[['Орфография',1,'Подбери проверочное слово к слову «лесной».','Лес'],['Члены предложения',2,'Найди подлежащее: «Солнце светит».','Солнце'],['Число',1,'Поставь слово «дом» во множественное число.','Дома'],['Состав слова',2,'Назови приставку в слове «подбежал».','под-'],['Части речи',1,'Какая часть речи слово «зимний»?','Имя прилагательное'],['Пунктуация',1,'Какой знак в конце предложения «Куда ты идёшь»?','Вопросительный знак'],['Состав слова',3,'Назови суффикс в слове «лесник».','-ник-']],
-  4:[['Части речи',1,'Какая часть речи отвечает на вопросы «что делать?» и «что сделать?»','Глагол'],['Члены предложения',2,'Назови сказуемое: «Ветер усилился».','Усилился'],['Падежи',2,'На какой вопрос отвечает родительный падеж существительного?','Кого? Чего?'],['Части речи',1,'В каком времени глагол «читал»?','В прошедшем'],['Состав слова',2,'Назови приставку в слове «переписать».','пере-'],['Орфография',3,'Какое проверочное слово подойдёт для буквы «о» в слове «гора»?','Горы']]
- },
- world:{
-  1:[['Времена года',1,'Сколько времён года?','4'],['Растения',1,'Какое из деревьев хвойное: ель или берёза?','Ель'],['Животные',1,'Кто из них насекомое: бабочка или воробей?','Бабочка'],['Природа',1,'Что даёт Земле свет и тепло днём?','Солнце'],['Растения',2,'Какая часть растения обычно поглощает воду из почвы?','Корень'],['Погода',2,'В какое время года обычно идёт снег в средней полосе России?','Зимой']],
-  2:[['Погода',1,'Как называется вода, падающая с неба в виде капель?','Дождь'],['Животные',1,'Кто выращивает потомство из икринок: лягушка или кошка?','Лягушка'],['Природа',2,'Как называется переход воды из жидкости в газ?','Испарение'],['Растения',2,'Что образуется у цветкового растения из цветка после опыления и оплодотворения?','Плод (обычно с семенами)'],['Ориентирование',2,'Где на компасе находится буква N?','Север'],['Времена года',1,'Какое время года наступает после весны?','Лето']],
-  3:[['Природа',1,'Как называется самый верхний плодородный слой земли?','Почва'],['Человек',2,'Какой орган перекачивает кровь?','Сердце'],['Ориентирование',1,'В какой стороне света восходит Солнце?','На востоке (приблизительно)'],['Вода',2,'Как называется переход воды в лёд?','Замерзание (кристаллизация)'],['Растения',1,'Какой газ растения поглощают при фотосинтезе?','Углекислый газ'],['Экология',2,'Почему нельзя оставлять мусор в лесу?','Он загрязняет среду и вредит живым организмам']],
-  4:[['Космос',1,'Как называется спутник Земли?','Луна'],['География',2,'Какой океан самый большой на Земле?','Тихий'],['География',2,'Как называется воображаемая линия, делящая Землю на Северное и Южное полушария?','Экватор'],['История',2,'Как называется наука, изучающая прошлое человечества?','История'],['Природа',1,'Сколько материков обычно выделяют в школьной географии России?','6'],['География',3,'Как называется прибор для определения сторон света?','Компас']]
- },
- en:{
-  1:[['Слова',1,'Как по-английски «кот»?','Cat'],['Слова',1,'Как по-английски «собака»?','Dog'],['Цвета',1,'Как по-английски «красный»?','Red'],['Приветствие',1,'Как по-английски поздороваться?','Hello / Hi'],['Числа',2,'Как по-английски «два»?','Two'],['Слова',2,'Как по-английски «книга»?','Book']],
-  2:[['Слова',1,'Переведи на русский слово «cat».','Кот / кошка'],['Приветствие',1,'Как по-английски сказать «привет»?','Hello / Hi'],['Числа',2,'Как по-английски «семь»?','Seven'],['Цвета',1,'Как по-английски «синий»?','Blue'],['Слова',1,'Как по-английски «книга»?','Book'],['Местоимения',2,'Как по-английски сказать «я»?','I']],
-  3:[['Число существительных',2,'Напиши множественное число слова «cat».','Cats'],['Глагол to be',1,'Вставь слово: I ___ a pupil.','am'],['Глагол to be',1,'Вставь слово: She ___ happy.','is'],['Цвета',1,'Переведи «зелёный».','Green'],['Артикли',2,'Выбери a или an: ___ apple.','an'],['Антонимы',2,'Назови антоним слова «big».','Small'],['Лексика',2,'Как по-английски «семья»?','Family']],
-  4:[['Глагол to be',1,'Вставь слово: They ___ at school.','are'],['Лексика',1,'Переведи «friend» на русский.','Друг'],['Глаголы',2,'Как по-английски «читать»?','Read'],['Множественное число',2,'Какое множественное число у слова «child»?','Children'],['Вопросы',2,'Как по-английски спросить «Как тебя зовут?»','What is your name?'],['Простое настоящее',3,'Вставь слово: He ___ football every day. (play)','plays']]
+(()=>{'use strict';
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+const URL='https://jkrjxviduubqbikuycte.supabase.co';
+const KEY='sb_publishable_ks8aQQQoe-cWXRo6b947cw_bYzTiBcZ';
+const SUBJECTS={math:'Математика',russian:'Русский язык',world:'Окружающий мир',english:'Английский язык'};
+let db=null,user=null,editingId=null,questions=[],listFilter='all',waiting=false;
+function status(selector,text,isError=false){const e=$(selector);e.textContent=text||'';e.classList.toggle('error',isError)}
+function fail(error){return (error&&error.message)||'Не удалось выполнить операцию. Повторите попытку.'}
+function busy(value){waiting=value;$$('form button[type="submit"], #reload-questions').forEach(b=>b.disabled=value)}
+function text(tag,cls,content){const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=String(content||'');return e}
+function showAuthTab(tab){
+ const login=tab==='login';
+ $('#teacher-login-form').hidden=!login;$('#teacher-signup-form').hidden=login;
+ $('#show-login').classList.toggle('active',login);
+ $('#show-signup').classList.toggle('active',!login);
+ $('#show-login').setAttribute('aria-selected',String(login));
+ $('#show-signup').setAttribute('aria-selected',String(!login));
+ status('#auth-status','');
+}
+async function loadUser(){
+ if(!db)return;
+ const {data,error}=await db.auth.getUser();
+ user=error?null:(data.user||null);
+ $('#teacher-logged-in').hidden=!user;
+ $('#teacher-auth-forms').hidden=!!user;
+ $('#editor').hidden=!user;
+ $('#my-questions').hidden=!user;
+ $('#teacher-email').textContent=user?.email||'преподаватель';
+ if(user)await loadQuestions();
+ else{questions=[];resetEditor();$('#my-question-items').replaceChildren();}
+}
+async function login(event){
+ event.preventDefault();if(waiting||!db)return;
+ busy(true);status('#auth-status','');
+ try{
+  const {error}=await db.auth.signInWithPassword({email:$('#login-email').value.trim(),password:$('#login-password').value});
+  if(error)throw error;
+  $('#login-password').value='';
+  await loadUser();
+  status('#auth-status','Вход выполнен.');
+ }catch(error){status('#auth-status',fail(error),true)}
+ finally{busy(false)}
+}
+async function signup(event){
+ event.preventDefault();if(waiting||!db)return;
+ const password=$('#signup-password').value;
+ if(password.length<8){status('#auth-status','Пароль должен содержать не менее 8 символов.',true);return}
+ busy(true);status('#auth-status','');
+ try{
+  const {data,error}=await db.auth.signUp({
+   email:$('#signup-email').value.trim(),password,
+   options:{emailRedirectTo:'https://steepbear.github.io/BabaYaga/questions.html'}
+  });
+  if(error)throw error;
+  $('#signup-password').value='';
+  if(data.session){await loadUser();status('#auth-status','Регистрация завершена. Можно добавлять вопросы.')}
+  else{status('#auth-status','Проверьте почту: для завершения регистрации откройте письмо и подтвердите email. После подтверждения вернитесь сюда.');}
+ }catch(error){status('#auth-status',fail(error),true)}
+ finally{busy(false)}
+}
+function resetEditor(){
+ editingId=null;$('#question-form').reset();
+ $('#editor-heading').textContent='Новый вопрос';$('#cancel-edit').hidden=true;
+ status('#question-status','');
+}
+function questionValues(){
+ const subject=$('#question-subject').value,grade=Number($('#question-grade').value),difficulty=Number($('#question-difficulty').value);
+ const topic=$('#question-topic').value.trim(),question_text=$('#question-text').value.trim(),answer_text=$('#question-answer').value.trim();
+ const kind=$('input[name="question-visibility"]:checked').value;
+ if(!SUBJECTS[subject]||![1,2,3,4].includes(grade)||![1,2,3].includes(difficulty))throw Error('Проверьте класс, предмет и сложность.');
+ if(question_text.length<5||question_text.length>1200)throw Error('Текст вопроса должен содержать от 5 до 1200 символов.');
+ if(!answer_text||answer_text.length>600)throw Error('Укажите правильный ответ длиной до 600 символов.');
+ if(topic.length>120)throw Error('Тема слишком длинная.');
+ if(!['private','community'].includes(kind))throw Error('Выберите доступность вопроса.');
+ return {subject_id:subject,grade,difficulty,topic:topic||null,question_text,answer_text,kind};
+}
+async function save(event){
+ event.preventDefault();if(waiting||!db||!user)return;
+ let values;try{values=questionValues()}catch(error){status('#question-status',fail(error),true);return}
+ busy(true);$('#save-question').disabled=true;status('#question-status','');
+ try{
+  let result;
+  if(editingId){
+   result=await db.from('questions').update(values).eq('id',editingId).eq('owner_id',user.id).select('id').single();
+  }else{
+   result=await db.from('questions').insert({...values,owner_id:user.id}).select('id').single();
+  }
+  if(result.error)throw result.error;
+  resetEditor();
+  await loadQuestions();
+  status('#question-status',values.kind==='community'?'Вопрос опубликован в общей библиотеке.':'Вопрос сохранён в личной библиотеке.');
+ }catch(error){status('#question-status',fail(error),true)}
+ finally{busy(false);$('#save-question').disabled=false}
+}
+async function loadQuestions(){
+ if(!user||!db)return;
+ status('#list-status','');
+ const {data,error}=await db.from('questions').select('id,subject_id,grade,difficulty,topic,question_text,answer_text,kind,created_at,updated_at').eq('owner_id',user.id).order('updated_at',{ascending:false}).limit(200);
+ if(error){status('#list-status',fail(error),true);return}
+ questions=data||[];
+ renderList();
+}
+function renderList(){
+ const host=$('#my-question-items');host.replaceChildren();
+ const chosen=questions.filter(q=>listFilter==='all'||q.kind===listFilter);
+ $('#questions-count').textContent=questions.length+' ваших вопросов · показано '+chosen.length;
+ if(!chosen.length){host.append(text('p','q-muted',questions.length?'Для выбранного фильтра вопросов нет.':'У вас пока нет собственных вопросов.'));return}
+ for(const q of chosen){
+  const card=text('article','my-question-card','');
+  const meta=text('div','my-question-top','');
+  const badge=text('span','my-kind '+(q.kind==='community'?'community':''),q.kind==='community'?'Общедоступный':'Личный');
+  meta.append(badge,text('span','',q.grade+' класс · '+(SUBJECTS[q.subject_id]||q.subject_id)+' · '+(['','Лёгкий','Обычный','Сложный'][q.difficulty]||'')));
+  card.append(meta);
+  if(q.topic)card.append(text('div','my-topic','Тема: '+q.topic));
+  card.append(text('h3','',q.question_text),text('div','my-answer','Ответ: '+q.answer_text));
+  const controls=text('div','my-question-actions','');
+  const edit=text('button','','Изменить'),vis=text('button','',q.kind==='community'?'Сделать личным':'Опубликовать'),del=text('button','delete-question','Удалить');
+  for(const button of [edit,vis,del])button.type='button';
+  edit.addEventListener('click',()=>editQuestion(q.id));
+  vis.addEventListener('click',()=>changeVisibility(q.id));
+  del.addEventListener('click',()=>deleteQuestion(q.id));
+  controls.append(edit,vis,del);card.append(controls);host.append(card);
  }
-};
-// Дополнительные демонстрационные задания сложного уровня. Не проверенная редакционная база.
-const extra={
- math:{
- 1:[['Задача',3,'В корзине было 9 яблок, 3 съели, затем положили 5. Сколько яблок стало?','11'],['Сравнение',3,'У Саши 7 карандашей, у Оли на 4 больше. Сколько карандашей у них вместе?','18']],
- 2:[['Задача',3,'В трёх коробках по 8 конфет. 7 конфет съели. Сколько осталось?','17'],['Выражения',3,'Сколько будет (35 − 11) : 3?','8']],
- 3:[['Задача',3,'В магазине 7 коробок по 8 тетрадей. Продали 19. Сколько тетрадей осталось?','37'],['Периметр',3,'Периметр квадрата 36 см. Чему равна его сторона?','9 см']],
- 4:[['Действия',3,'Вычисли: (480 : 6 + 25) × 3.','315'],['Задача',3,'Автобус ехал 3 часа со скоростью 60 км/ч и ещё 2 часа со скоростью 45 км/ч. Сколько километров он проехал?','270 км'],['Числа',1,'Назови следующее число после 9999.','10 000']]
- },
- rus:{
- 1:[['Слоги',3,'Раздели слово «машина» на слоги и назови их число.','ма-ши-на, три слога'],['Слова',3,'Составь предложение из слов «поёт», «птица», «весело».','Птица весело поёт.']],
- 2:[['Орфография',3,'Вставь пропущенную букву и назови проверочное слово: «тр_ва».','а; травы'],['Части речи',3,'Назови часть речи каждого слова: «Яркое солнце светит».','Яркое — прилагательное; солнце — существительное; светит — глагол']],
- 3:[['Состав слова',3,'Разбери слово «подснежник» по частям: приставка, корень, суффикс, окончание.','под- / -снеж- / -ник- / нулевое окончание'],['Части речи',3,'Определи число и род прилагательного «весенняя».','Единственное число, женский род']],
- 4:[['Части речи',3,'Укажи лицо и число глагола «читаем».','1-е лицо, множественное число'],['Падежи',3,'Определи падеж слова «книгу» в предложении «Я читаю книгу».','Винительный падеж']]
- },
- world:{
- 1:[['Животные',3,'Назови по одному дикому и домашнему животному.','Например, лиса и кошка'],['Времена года',3,'Назови четыре времени года по порядку, начиная с зимы.','Зима, весна, лето, осень']],
- 2:[['Природа',3,'Какой природный процесс образует облака из водяного пара?','Конденсация'],['Экология',3,'Объясни, почему при выходе из леса нельзя оставлять костёр непотушенным.','Может начаться пожар']],
- 3:[['Человек',3,'Для чего человеку нужны лёгкие?','Для газообмена: получения кислорода и удаления углекислого газа'],['Природа',3,'Назови три состояния воды.','Твёрдое, жидкое, газообразное']],
- 4:[['География',3,'Что показывает масштаб географической карты?','Во сколько раз расстояния на карте меньше расстояний на местности'],['Природа',3,'Почему происходит смена дня и ночи на Земле?','Из-за вращения Земли вокруг своей оси']]
- },
- en:{
- 1:[['Слова',3,'Назови по-английски три цвета: красный, синий, зелёный.','Red, blue, green'],['Числа',3,'Назови числа one, two, three по-русски.','Один, два, три']],
- 2:[['Слова',3,'Переведи на английский «большая собака».','A big dog'],['Множественное число',3,'Как сказать по-английски «две кошки»?','Two cats']],
- 3:[['Глагол to be',3,'Вставь форму to be: My friends ___ happy.','are'],['Предложения',3,'Переведи на английский «Это моя книга».','This is my book']],
- 4:[['Грамматика',3,'Сделай предложение вопросительным: He likes apples.','Does he like apples?'],['Множественное число',3,'Поставь во множественное число: one mouse.','Mice']]
+}
+function editQuestion(id){
+ const q=questions.find(x=>x.id===id);if(!q)return;
+ editingId=id;$('#editor-heading').textContent='Редактирование вопроса';$('#cancel-edit').hidden=false;
+ $('#question-grade').value=String(q.grade);$('#question-subject').value=q.subject_id;
+ $('#question-difficulty').value=String(q.difficulty);$('#question-topic').value=q.topic||'';
+ $('#question-text').value=q.question_text;$('#question-answer').value=q.answer_text;
+ const radio=$('input[name="question-visibility"][value="'+q.kind+'"]');if(radio)radio.checked=true;
+ status('#question-status','');
+ $('#editor').scrollIntoView({behavior:'smooth',block:'start'});
+}
+async function changeVisibility(id){
+ if(waiting)return;
+ const q=questions.find(x=>x.id===id);if(!q)return;
+ const kind=q.kind==='community'?'private':'community';
+ if(kind==='community'&&!confirm('Опубликовать вопрос в общей библиотеке для всех игроков с кодом?'))return;
+ waiting=true;status('#list-status','');
+ try{
+  const {data,error}=await db.from('questions').update({kind}).eq('id',id).eq('owner_id',user.id).select('id').single();
+  if(error)throw error;
+  if(editingId===id)resetEditor();
+  await loadQuestions();
+  status('#list-status',kind==='community'?'Вопрос опубликован.':'Вопрос теперь личный.');
+ }catch(error){status('#list-status',fail(error),true)}finally{waiting=false}
+}
+async function deleteQuestion(id){
+ if(waiting||!user)return;
+ if(!confirm('Удалить этот вопрос без возможности восстановления?'))return;
+ waiting=true;status('#list-status','');
+ try{
+  const {error}=await db.from('questions').delete().eq('id',id).eq('owner_id',user.id);
+  if(error)throw error;
+  if(editingId===id)resetEditor();
+  await loadQuestions();
+  status('#list-status','Вопрос удалён.');
+ }catch(error){status('#list-status',fail(error),true)}finally{waiting=false}
+}
+function start(){
+ $('#show-login').addEventListener('click',()=>showAuthTab('login'));
+ $('#show-signup').addEventListener('click',()=>showAuthTab('signup'));
+ $('#teacher-login-form').addEventListener('submit',login);
+ $('#teacher-signup-form').addEventListener('submit',signup);
+ $('#question-form').addEventListener('submit',save);
+ $('#clear-question').addEventListener('click',resetEditor);
+ $('#cancel-edit').addEventListener('click',resetEditor);
+ $('#reload-questions').addEventListener('click',()=>loadQuestions());
+ $$('.my-filter-btn').forEach(button=>button.addEventListener('click',()=>{
+  listFilter=button.dataset.kind;
+  $$('.my-filter-btn').forEach(b=>{const on=b===button;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
+  renderList();
+ }));
+ $('#teacher-signout').addEventListener('click',async()=>{
+  if(!db)return;
+  const {error}=await db.auth.signOut();
+  if(error){status('#auth-status',fail(error),true);return}
+  await loadUser();status('#auth-status','Вы вышли из кабинета.');
+ });
+ if(!window.supabase||!window.supabase.createClient){
+  status('#auth-status','Не удалось загрузить модуль авторизации. Проверьте подключение и обновите страницу.',true);return;
  }
-};
-for(const subject in extra)for(const grade in extra[subject])raw[subject][grade].push(...extra[subject][grade]);
-
-const list=[];for(const subject in raw){for(const grade in raw[subject]){raw[subject][grade].forEach(([topic,level,text,answer],i)=>list.push({id:`${subject}-${grade}-${i}`,grade:Number(grade),subject,topic,level,text,answer,source:'official'}));}}
-window.BY_QUESTIONS=list;
-window.BY_SUBJECTS={math:'Математика · Баба Яга',rus:'Русский язык · Змей Горыныч',world:'Окружающий мир · Леший',en:'Английский язык · Кот учёный'};
+ db=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+ db.auth.onAuthStateChange((event)=>{
+  if(['SIGNED_IN','SIGNED_OUT','TOKEN_REFRESHED','USER_UPDATED'].includes(event)){
+   setTimeout(()=>loadUser().catch(e=>status('#auth-status',fail(e),true)),0);
+  }
+ });
+ loadUser().catch(e=>status('#auth-status',fail(e),true));
+}
+start();
 })();

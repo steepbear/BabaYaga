@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102c25">
+<meta name="description" content="Добавить собственный вопрос в настольную игру «Баба Яга против!». Личные вопросы и общая библиотека преподавателей.">
+<title>Добавить вопрос — Баба Яга против!</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/v3.css">
+<link rel="stylesheet" href="css/questions.css">
+</head>
+<body class="inner-page question-editor-page">
+<header class="site-header"><div class="container nav-wrap">
+<a href="index.html" class="wordmark" aria-label="Баба Яга против! — главная"><img src="assets/logo.webp" alt="Баба Яга против!" class="header-logo" width="138" height="90"></a>
+<button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню">☰</button>
+<nav id="site-nav" class="main-nav" aria-label="Основное меню"><a href="index.html#about">Об игре</a><a href="index.html#how">Как играть</a><a href="library.html">Библиотека</a><a href="rules.html">Правила</a><a href="index.html#project">О проекте</a><a class="nav-button" href="library.html">К вопросам ↗</a></nav>
+</div></header>
+<main>
+<section class="questions-hero"><div class="container">
+<span class="section-kicker kicker-amber">МАТЕРИАЛЫ ПРЕПОДАВАТЕЛЕЙ</span>
+<h1>Добавить <em>вопрос</em></h1>
+<p>Создавайте собственные задания для игры. Сохраняйте их только для себя или публикуйте в общей библиотеке.</p>
+</div></section>
+<div class="container questions-layout">
+<aside class="questions-sidebar">
+<div class="q-panel questions-nav"><div class="side-title">БИБЛИОТЕКА</div>
+<a href="library.html" class="side-link"><span class="side-icon">▦</span> Генератор вопросов</a>
+<a href="#editor" class="side-link active"><span class="side-icon">＋</span> Добавить вопрос</a>
+<a href="#my-questions" class="side-link"><span class="side-icon">▤</span> Мои вопросы</a>
+</div>
+<div class="q-panel questions-help"><strong>Как это работает?</strong>
+<p>Для игры и просмотра редакционных вопросов регистрация не требуется. Учётная запись нужна только для собственных заданий.</p>
+</div>
+</aside>
+<div class="questions-content">
+<section class="q-panel q-auth-panel" id="teacher-auth">
+<div class="q-section-heading"><div><h2>Кабинет преподавателя</h2><p class="q-sub">Войдите или зарегистрируйтесь, чтобы сохранять вопросы.</p></div></div>
+<div id="teacher-logged-in" class="teacher-logged-in" hidden>
+<div><span class="teacher-indicator" aria-hidden="true">✓</span> Вы вошли как <strong id="teacher-email"></strong></div>
+<button id="teacher-signout" type="button" class="q-btn q-btn-outline">Выйти</button>
+</div>
+<div id="teacher-auth-forms">
+<div class="auth-tabs" role="tablist" aria-label="Вход или регистрация">
+<button id="show-login" type="button" class="auth-tab active" aria-selected="true">Войти</button>
+<button id="show-signup" type="button" class="auth-tab" aria-selected="false">Регистрация</button>
+</div>
+<form id="teacher-login-form" class="auth-form">
+<label>Email<input id="login-email" type="email" autocomplete="email" required placeholder="teacher@example.com"></label>
+<label>Пароль<input id="login-password" type="password" autocomplete="current-password" required placeholder="Введите пароль"></label>
+<button class="q-btn q-btn-primary" type="submit">Войти в кабинет</button>
+</form>
+<form id="teacher-signup-form" class="auth-form" hidden>
+<label>Email<input id="signup-email" type="email" autocomplete="email" required placeholder="teacher@example.com"></label>
+<label>Пароль<input id="signup-password" type="password" autocomplete="new-password" required minlength="8" placeholder="Не менее 8 символов"></label>
+<button class="q-btn q-btn-primary" type="submit">Зарегистрироваться</button>
+<p class="auth-hint">После регистрации может понадобиться подтвердить email по ссылке из письма. Пароль для кабинета не связан с кодом игрового поля.</p>
+</form>
+</div>
+<p id="auth-status" class="q-status" role="status" aria-live="polite"></p>
+</section>
+<section class="q-panel q-editor-panel" id="editor" hidden>
+<div class="q-section-heading"><div><h2 id="editor-heading">Новый вопрос</h2><p class="q-sub">Заполните содержание и выберите, кто сможет его использовать.</p></div><button id="cancel-edit" type="button" class="q-btn q-btn-outline" hidden>Отменить редактирование</button></div>
+<form id="question-form">
+<div class="q-form-grid">
+<label>Класс<select id="question-grade" required><option value="1">1 класс</option><option value="2" selected>2 класс</option><option value="3">3 класс</option><option value="4">4 класс</option></select></label>
+<label>Предмет<select id="question-subject" required><option value="math">Математика — Баба Яга</option><option value="russian">Русский язык — Змей Горыныч</option><option value="world">Окружающий мир — Леший</option><option value="english">Английский язык — Кот учёный</option></select></label>
+<label>Сложность<select id="question-difficulty" required><option value="1">Лёгкий · кубик 1–2</option><option value="2">Обычный · кубик 3–4</option><option value="3">Сложный · кубик 5–6</option></select></label>
+<label>Тема <span class="q-optional">необязательно</span><input id="question-topic" maxlength="120" placeholder="Например, Таблица умножения"></label>
+</div>
+<label class="q-full">Текст вопроса<textarea id="question-text" maxlength="1200" rows="4" required placeholder="Напишите вопрос для игрока"></textarea></label>
+<label class="q-full">Правильный ответ<textarea id="question-answer" maxlength="600" rows="3" required placeholder="Ответ для ведущего"></textarea></label>
+<fieldset class="visibility-choice"><legend>Кто видит вопрос?</legend>
+<label class="visibility-option"><input type="radio" name="question-visibility" value="private" checked><span><strong>Только я</strong><small>Личный вопрос. В общей библиотеке его нет.</small></span></label>
+<label class="visibility-option"><input type="radio" name="question-visibility" value="community"><span><strong>Общедоступный</strong><small>После сохранения его смогут получать игроки с кодом доступа.</small></span></label>
+</fieldset>
+<div class="editor-actions"><button class="q-btn q-btn-primary" id="save-question" type="submit">Сохранить вопрос</button><button class="q-btn q-btn-outline" id="clear-question" type="button">Очистить форму</button></div>
+<p class="auth-hint">Общедоступные вопросы попадают в игровую библиотеку сразу после публикации. Публикуйте только проверенные задания.</p>
+<p id="question-status" class="q-status" role="status" aria-live="polite"></p>
+</form>
+</section>
+<section class="q-panel q-list-panel" id="my-questions" hidden>
+<div class="q-section-heading"><div><h2>Мои вопросы</h2><p class="q-sub" id="questions-count">Сохранённые вами задания.</p></div><button id="reload-questions" class="q-btn q-btn-outline" type="button">Обновить список</button></div>
+<div class="my-filter" role="group" aria-label="Фильтр моих вопросов">
+<button class="my-filter-btn active" type="button" data-kind="all" aria-pressed="true">Все</button>
+<button class="my-filter-btn" type="button" data-kind="private" aria-pressed="false">Личные</button>
+<button class="my-filter-btn" type="button" data-kind="community" aria-pressed="false">Опубликованные</button>
+</div>
+<div id="my-question-items" class="my-question-items"><p class="q-muted">Вопросов пока нет.</p></div>
+<p id="list-status" class="q-status" role="status" aria-live="polite"></p>
+</section>
+</div></div>
+</main>
+<footer class="footer"><div class="container footer-bottom"><span>© «Баба Яга против!» · Школьный образовательный проект</span><a href="index.html">На главную ↗</a></div></footer>
+<script src="js/common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
+<script src="js/questions.js"></script>
+</body>
+</html>
