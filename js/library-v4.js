@@ -92,7 +92,7 @@ async function runRequest(fn){
  if(busy)return;
  const controllerHere=new AbortController();
  controller=controllerHere;
- const timeout=setTimeout(()=>controllerHere.abort(),25000);
+ const timeout=setTimeout(()=>controllerHere.abort(),60000);
  setBusy(true);
  try{await fn(controllerHere.signal)}
  catch(error){
@@ -242,11 +242,11 @@ async function generate(mode,scroll){
  const chosen=mode==='game'?SUBJECTS:[subject];
  const originalSubject=subject;
  await runRequest(async signal=>{
-  const results={};
-  for(const name of chosen){
-   tell('#generate-message',mode==='game'?'Загружаем '+NAMES[name]+'…':'Загружаем вопросы…');
-   results[name]=await Promise.all([1,2,3].map(level=>fetchLevel(code,grade,name,level,perLevel,signal)));
-  }
+  tell('#generate-message',mode==='game'?'Формируем четыре комплекта вопросов…':'Загружаем вопросы…');
+  const pairs=await Promise.all(chosen.map(async name=>[
+    name,await Promise.all([1,2,3].map(level=>fetchLevel(code,grade,name,level,perLevel,signal)))
+  ]));
+  const results=Object.fromEntries(pairs);
   if(signal.aborted)return;
   asked.clear();
   if(mode==='game'){
