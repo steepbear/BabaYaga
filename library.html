@@ -25,7 +25,7 @@
   <div id="access-success" class="access-success" hidden><span aria-hidden="true">✓</span> Код принят. Библиотека открыта. <button id="change-code" type="button">Сменить код</button></div>
  </section>
  <section class="panel section-card generator-section" id="generator-section" hidden>
-  <h2>Подготовить вопросы</h2><p class="sub">Соберите подборку по каждому уровню сложности для бросков кубика.</p>
+  <h2>Подготовить вопросы</h2><p class="sub">«Сформировать набор» — один предмет. «Сформировать игру» — сразу четыре предмета для четырёх ведущих.</p>
   <div class="field"><label for="grade-select">Класс</label><select id="grade-select"><option value="1">1 класс — скоро</option><option value="2" selected>2 класс</option><option value="3">3 класс — скоро</option><option value="4">4 класс — скоро</option></select></div>
   <div class="field" style="margin-top:22px"><span class="field-title">Предмет и злодей</span>
    <div class="subject-tiles" role="group" aria-label="Предмет">
@@ -36,16 +36,16 @@
    </div>
   </div>
   <div class="level-legend" aria-label="Сложность вопросов"><span class="difficulty-1">Кубик 1–2 — <strong>Лёгкий</strong></span><span class="difficulty-2">Кубик 3–4 — <strong>Обычный</strong></span><span class="difficulty-3">Кубик 5–6 — <strong>Сложный</strong></span></div>
-  <div class="generator-actions"><div class="field"><label for="count-select">Вопросов на каждый уровень</label><select id="count-select"><option value="2" selected>2 (всего 6)</option><option value="4">4 (всего 12)</option><option value="6">6 (всего 18)</option><option value="10">10 (всего 30)</option><option value="22">22 (всего 66)</option></select></div><div><button id="generate-btn" type="button" class="btn btn-forest">↝ &nbsp; Сформировать набор</button></div></div>
+  <div class="generator-actions"><div class="field"><label for="count-select">Вопросов на каждый уровень каждого предмета</label><select id="count-select"><option value="2" selected>2 (6 на предмет)</option><option value="4">4 (12 на предмет)</option><option value="6">6 (18 на предмет)</option><option value="10">10 (30 на предмет)</option><option value="22">22 (66 на предмет)</option></select></div><div class="generator-buttons"><button id="generate-btn" type="button" class="btn btn-outline-dark">↝ Сформировать набор</button><button id="generate-game-btn" type="button" class="btn btn-forest">✦ Сформировать игру</button></div></div><p class="muted-info">Полная игра содержит четыре отдельных комплекта, по одному на каждого злодея. Все комплекты можно распечатать одновременно.</p>
   <p class="muted-info">На каждом уровне вопросы выбираются случайно из редакционной библиотеки, темы перемешиваются.</p>
   <p id="generate-message" class="notice-error" role="status" aria-live="polite"></p>
  </section>
  <section class="panel section-card print-result" id="results" hidden>
-  <div class="result-meta no-print"><div><h2>Ваш набор вопросов</h2><span id="result-count" class="counter-tag">Набор не сформирован</span><span id="asked-progress" class="asked-progress" role="status" aria-live="polite">Задано: 0 из 0</span></div>
-   <div class="result-actions"><button id="reshuffle-btn" class="btn btn-outline-dark btn-small" type="button">↻ Другие вопросы</button><button id="reset-asked" class="btn btn-outline-dark btn-small" type="button" title="Сбросить отметки, оставив вопросы">↺ Новая игра</button><button id="toggle-answers" class="btn btn-outline-dark btn-small" type="button">Показать ответы</button><button id="print-btn" class="btn btn-forest btn-small" type="button">▣ Печать / PDF</button></div>
+  <div class="result-meta no-print"><div><h2 id="result-title">Ваш набор вопросов</h2><span id="result-count" class="counter-tag">Набор не сформирован</span><span id="asked-progress" class="asked-progress" role="status" aria-live="polite">Задано: 0 из 0</span></div>
+   <div class="result-actions"><button id="reshuffle-btn" class="btn btn-outline-dark btn-small" type="button">↻ Другие вопросы</button><button id="reset-asked" class="btn btn-outline-dark btn-small" type="button" title="Оставить те же вопросы и снять все отметки">↺ Сбросить отметки</button><button id="toggle-answers" class="btn btn-outline-dark btn-small" type="button">Показать ответы</button><button id="print-btn" class="btn btn-forest btn-small" type="button">▣ Печать / PDF</button></div>
   </div>
-  <p class="asked-hint no-print">Отмечайте «Вопрос задан» по ходу игры. Отметки сохраняются при обновлении страницы; «Новая игра» очищает их.</p><div class="print-head print-only"><h2>Баба Яга против! — вопросы для ведущего</h2><p id="print-subtitle"></p><div class="print-note">Вопросы и ответы напечатаны вместе. Квадратик «Задан» можно отмечать по ходу игры.</div></div>
-  <div id="question-output" class="question-list"></div><div id="template-print-pages" class="template-print-pages" aria-hidden="true"></div>
+  <div id="result-subject-tabs" class="result-subject-tabs no-print" role="tablist" aria-label="Предметы сформированной игры" hidden></div><p class="asked-hint no-print">Отмечайте «Вопрос задан» по ходу игры. Отметки сохраняются при переключении предметов и обновлении страницы. «Сбросить отметки» сохраняет состав вопросов.</p><div class="print-head print-only"><h2>Баба Яга против! — вопросы для ведущего</h2><p id="print-subtitle"></p><div class="print-note">Вопросы и ответы напечатаны вместе. Квадратик «Задан» можно отмечать по ходу игры.</div></div>
+  <div id="question-output" class="question-list" role="tabpanel" aria-label="Вопросы выбранного предмета"></div><div id="template-print-pages" class="template-print-pages" aria-hidden="true"></div>
   
  </section>
 </div></div></section></main>
