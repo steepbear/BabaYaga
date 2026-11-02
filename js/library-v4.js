@@ -155,7 +155,7 @@ $('#toggle-answers').addEventListener('click',()=>{const all=$$('.answer-toggle'
 
 const PRINT_ART={math:'assets/template-yaga.webp',russian:'assets/template-dragon.webp',world:'assets/template-leshy.webp',english:'assets/template-cat.webp'};
 function prepareTemplatePrint(){
- const host=$('#template-print-pages');host.replaceChildren();
+ const host=$('#template-print-pages');document.body.append(host);host.replaceChildren();
  if(!currentGame||!currentGame.sets)return;
  const sets=currentGame.sets;
  // The original spreadsheet contains 22 rows per difficulty; print in groups of seven
