@@ -9,7 +9,7 @@ const NAMES={math:'Математика',russian:'Русский язык',world
 const LEVELS={1:'Лёгкий',2:'Обычный',3:'Сложный'},DICE={1:'1–2',2:'3–4',3:'5–6'};
 const SOURCES={editorial:'Редакционные',community:'Пользовательские',private:'Личные'};
 const PRINT_ART={math:'assets/template-yaga.webp',russian:'assets/template-dragon.webp',world:'assets/template-leshy.webp',english:'assets/template-cat.webp'};
-let code='',subject='math',source='editorial',busy=false,controller=null,currentGame=null,activeSubject='math',asked=new Set();
+let code='',subject='math',source='editorial',busy=false,controller=null,currentGame=null,activeSubject='math',asked=new Set(),difficultyFilters={};
 let teacherClient=null,teacher=null,teacherReady=null,modalResolve=null,lastFocus=null;
 
 function el(tag,cls,value){const element=document.createElement(tag);if(cls)element.className=cls;if(value!==undefined)element.textContent=String(value);return element}
@@ -25,10 +25,10 @@ function setBusy(value){
 }
 function savedCode(){try{return sessionStorage.getItem(SESSION_KEY)||''}catch{return ''}}
 function storeCode(value){try{if(value)sessionStorage.setItem(SESSION_KEY,value);else sessionStorage.removeItem(SESSION_KEY)}catch{}}
-function forgetGame(){currentGame=null;asked.clear();try{sessionStorage.removeItem(GAME_KEY)}catch{}$('#results').hidden=true;$('#template-print-pages').replaceChildren()}
+function forgetGame(){currentGame=null;asked.clear();difficultyFilters={};try{sessionStorage.removeItem(GAME_KEY)}catch{}$('#results').hidden=true;$('#template-print-pages').replaceChildren()}
 function storeGame(){
  if(!currentGame||currentGame.source==='private')return; // Do not store personal questions in sessionStorage.
- try{sessionStorage.setItem(GAME_KEY,JSON.stringify({...currentGame,code,activeSubject,asked:Array.from(asked)}))}catch{}
+ try{sessionStorage.setItem(GAME_KEY,JSON.stringify({...currentGame,code,activeSubject,asked:Array.from(asked),difficultyFilters}))}catch{}
 }
 function validSets(value){return Array.isArray(value)&&value.length===3&&value.every(Array.isArray)}
 function restoreGame(){
@@ -50,6 +50,7 @@ function restoreGame(){
   source=item.source;$('#count-select').value=String(item.perLevel);syncGradeOptions();$('#grade-select').value=String(item.grade);
   const radio=$('input[name="question-source"][value="'+source+'"]');if(radio)radio.checked=true;
   asked=new Set(Array.isArray(item.asked)?item.asked.map(String):[]);
+  difficultyFilters=item.difficultyFilters&&typeof item.difficultyFilters==='object'?item.difficultyFilters:{};
   selectSubject(activeSubject);render();
  }catch{forgetGame()}
 }
@@ -210,6 +211,15 @@ function render(){
  say('#result-count',totalCount()+' вопросов · '+currentGame.perLevel+' на уровень'+(currentGame.mode==='game'?' каждого предмета':''));
  $('#results').hidden=false;renderTabs();renderQuestions();
 }
+function applyDifficultyFilter(){
+ if(!currentGame)return;
+ const level=['all','1','2','3'].includes(difficultyFilters[activeSubject])?difficultyFilters[activeSubject]:'all';
+ $('.difficulty-filter-btn').forEach(b=>{const on=b.dataset.difficulty===level;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on))});
+ $('#question-output .level-group').forEach(g=>{g.hidden=level!=='all'&&g.dataset.level!==level});
+ const levels=setsFor(activeSubject),total=levels.reduce((n,rows)=>n+rows.length,0);
+ const shown=level==='all'?total:levels[Number(level)-1].length;
+ say('#difficulty-filter-count','Показано: '+shown+' из '+total);
+}
 function renderQuestions(){
  const name=activeSubject,sets=setsFor(name),output=$('#question-output');
  output.replaceChildren();let number=0;
@@ -253,7 +263,7 @@ function renderQuestions(){
   const selected=tab.dataset.subject===name;
   tab.classList.toggle('active',selected);tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;
  });
- output.setAttribute('aria-label','Вопросы: '+NAMES[name]);syncAnswers();updateAskedProgress();
+ output.setAttribute('aria-label','Вопросы: '+NAMES[name]);applyDifficultyFilter();syncAnswers();updateAskedProgress();
 }
 function syncAnswers(){const all=$$('.answer-toggle');$('#toggle-answers').textContent=all.length&&all.every(item=>item.open)?'Скрыть ответы':'Показать ответы'}
 async function generate(mode,scroll,requestedSource=source,requestedSubject=subject){
@@ -274,7 +284,7 @@ async function generate(mode,scroll,requestedSource=source,requestedSubject=subj
    name,await Promise.all([1,2,3].map(difficulty=>fetchLevel(code,grade,name,difficulty,perLevel,signal,requestedSource,accessToken)))
   ]));
   if(signal.aborted)return;
-  const data=Object.fromEntries(pairs);asked.clear();
+  const data=Object.fromEntries(pairs);asked.clear();difficultyFilters={};
   if(mode==='game'){
    currentGame={mode:'game',grade,perLevel,source:requestedSource,subjects:data};activeSubject='math';
   }else{
@@ -340,6 +350,7 @@ $('#reshuffle-btn').addEventListener('click',()=>{
  if(!currentGame)return;generate(currentGame.mode,true,currentGame.source,currentGame.subject||activeSubject);
 });
 $('#reset-asked').addEventListener('click',resetAsked);
+$('.difficulty-filter-btn').forEach(b=>b.addEventListener('click',()=>{if(!currentGame)return;difficultyFilters[activeSubject]=b.dataset.difficulty;applyDifficultyFilter();storeGame()}));
 $('#toggle-answers').addEventListener('click',()=>{const all=$$('.answer-toggle'),open=all.some(item=>!item.open);all.forEach(item=>item.open=open);syncAnswers()});
 $('#print-btn').addEventListener('click',()=>{if(currentGame&&totalCount()){prepareTemplatePrint();window.print()}});
 $('#teacher-modal-close').addEventListener('click',()=>closeTeacherModal(false));
