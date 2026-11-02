@@ -24,8 +24,8 @@ function setBusy(value){
   const btn=$('#'+id);if(btn)btn.disabled=value;
  }
  $('#access-submit').textContent=value&&!code?'Проверяем…':'Открыть библиотеку →';
- $('#generate-btn').textContent=value?'Загрузка…':'↝ Сформировать набор';
- $('#generate-game-btn').textContent=value?'Загрузка…':'✦ Сформировать игру';
+ $('#generate-btn').textContent=value?'Загрузка…':'Сформировать набор';
+ $('#generate-game-btn').textContent=value?'Загрузка…':'Сформировать игру';
 }
 function remember(value){
  try{if(value)sessionStorage.setItem(SESSION_KEY,value);else sessionStorage.removeItem(SESSION_KEY)}catch{}
