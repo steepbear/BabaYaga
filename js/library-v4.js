@@ -35,24 +35,33 @@ function restoreGame(){
  try{
   const raw=sessionStorage.getItem(GAME_KEY);if(!raw)return;
   const item=JSON.parse(raw),mode=item.mode==='game'?'game':'set';
-  if(item.code!==code||item.grade!==2||![2,4,6,10,22].includes(item.perLevel))return;
+  if(item.code!==code||![1,2,3,4].includes(item.grade)||![2,4,6,10,22].includes(item.perLevel))return;
+  if(item.source==='editorial'&&item.grade!==2)return;
   if(!['editorial','community'].includes(item.source))return;
   if(mode==='game'){
    if(!item.subjects||!SUBJECTS.every(name=>validSets(item.subjects[name])))return;
-   currentGame={mode,grade:2,perLevel:item.perLevel,source:item.source,subjects:item.subjects};
+   currentGame={mode,grade:item.grade,perLevel:item.perLevel,source:item.source,subjects:item.subjects};
    activeSubject=SUBJECTS.includes(item.activeSubject)?item.activeSubject:'math';
   }else{
    if(!SUBJECTS.includes(item.subject)||!validSets(item.sets))return;
-   currentGame={mode,grade:2,perLevel:item.perLevel,source:item.source,subject:item.subject,sets:item.sets};
+   currentGame={mode,grade:item.grade,perLevel:item.perLevel,source:item.source,subject:item.subject,sets:item.sets};
    activeSubject=item.subject;
   }
-  source=item.source;$('#count-select').value=String(item.perLevel);$('#grade-select').value='2';
+  source=item.source;$('#count-select').value=String(item.perLevel);syncGradeOptions();$('#grade-select').value=String(item.grade);
   const radio=$('input[name="question-source"][value="'+source+'"]');if(radio)radio.checked=true;
   asked=new Set(Array.isArray(item.asked)?item.asked.map(String):[]);
   selectSubject(activeSubject);render();
  }catch{forgetGame()}
 }
 
+function syncGradeOptions(){
+ const editorial=source==='editorial';
+ for(const option of $('#grade-select').options){
+  option.disabled=editorial&&option.value!=='2';
+  option.textContent=option.value+' класс'+(editorial&&option.value!=='2'?' — пока нет вопросов':'');
+ }
+ if(editorial)$('#grade-select').value='2';
+}
 function displayTeacher(){
  const logged=!!teacher;
  $('#teacher-session').hidden=!logged;$('#teacher-source-note').hidden=logged||source!=='private';
@@ -102,6 +111,18 @@ async function ensureTeacher(){
 }
 
 async function fetchLevel(access,grade,name,difficulty,count,signal,requestedSource='editorial',token=null){
+ if(requestedSource==='private'){
+  if(!token||!teacherClient||!teacher)throw Error('Необходима авторизация преподавателя.');
+  const {data,error}=await teacherClient.from('questions')
+   .select('id,subject_id,grade,difficulty,topic,question_text,answer_text,kind')
+   .eq('kind','private').eq('owner_id',teacher.id)
+   .eq('grade',grade).eq('subject_id',name).eq('difficulty',difficulty)
+   .limit(1000).abortSignal(signal);
+  if(error)throw Error('Не удалось загрузить личные вопросы: '+error.message);
+  const found=[...(data||[])];
+  for(let i=found.length-1;i>0;i--){const k=Math.floor(Math.random()*(i+1));[found[i],found[k]]=[found[k],found[i]]}
+  return found.slice(0,count);
+ }
  const headers={apikey:API_KEY,'Content-Type':'application/json',Accept:'application/json'};
  if(requestedSource==='private'){
   if(!token)throw Error('Необходима авторизация преподавателя.');
@@ -238,7 +259,7 @@ function syncAnswers(){const all=$$('.answer-toggle');$('#toggle-answers').textC
 async function generate(mode,scroll,requestedSource=source,requestedSubject=subject){
  if(busy||!code)return;
  const grade=Number($('#grade-select').value),perLevel=Number($('#count-select').value);
- if(grade!==2){say('#generate-message','Пока вопросы загружены только для 2-го класса.');return}
+ if(requestedSource==='editorial'&&grade!==2){say('#generate-message','Редакционные вопросы пока доступны только для 2-го класса.');return}
  if(!SOURCES[requestedSource])return;
  say('#generate-message','');
  let accessToken=null;
@@ -309,10 +330,10 @@ $('#change-code').addEventListener('click',()=>{
 });
 $$('.subject-button').forEach(button=>button.addEventListener('click',()=>selectSubject(button.dataset.subject)));
 $$('input[name="question-source"]').forEach(input=>input.addEventListener('change',()=>{
- source=input.value;displayTeacher();if(source==='private'&&!teacher){checkTeacherReady().then(()=>{if(!teacher)return openTeacherModal()}).catch(()=>{})}
+ source=input.value;syncGradeOptions();displayTeacher();if(source==='private'&&!teacher){checkTeacherReady().then(()=>{if(!teacher)return openTeacherModal()}).catch(()=>{})}
 }));
 $('#open-teacher-login').addEventListener('click',()=>{checkTeacherReady().then(()=>openTeacherModal()).catch(()=>{})});
-$('#grade-select').addEventListener('change',()=>say('#generate-message',$('#grade-select').value==='2'?'':'Для этого класса вопросы пока готовятся. Сейчас доступен 2-й класс.'));
+$('#grade-select').addEventListener('change',()=>say('#generate-message',''));
 $('#generate-btn').addEventListener('click',()=>generate('set',true));
 $('#generate-game-btn').addEventListener('click',()=>generate('game',true));
 $('#reshuffle-btn').addEventListener('click',()=>{
@@ -339,6 +360,7 @@ $('#teacher-sign-out').addEventListener('click',async()=>{
  if(error){say('#generate-message',error.message);return}
  teacher=null;if(currentGame?.source==='private')forgetGame();displayTeacher();
 });
+syncGradeOptions();
 teacherReady=initTeacher().catch(()=>{teacher=null;displayTeacher()});
 const existing=savedCode();if(existing){$('#access-code').value=existing;accessLogin()}
 })();
