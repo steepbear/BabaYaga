@@ -173,3 +173,25 @@ body.library-page .library-main{background:transparent}
 }
 @media(max-width:680px){body.library-page{background-size:auto 900px}}
 @media print{body.library-page{background:white!important;background-image:none!important}}
+
+/* Компактная шапка библиотеки: оставляем место только под текст. */
+body.library-page .library-hero{padding:24px 0 27px}
+body.library-page .library-hero h1{
+  font-size:clamp(36px,4.2vw,56px);
+  line-height:1.08;
+  margin:7px 0 9px;
+}
+body.library-page .library-hero p{
+  max-width:820px;
+  font-size:14px;
+  line-height:1.55;
+  margin:0;
+}
+@media(max-width:650px){
+  body.library-page .library-hero{padding:20px 0 23px}
+  body.library-page .library-hero h1{
+    font-size:clamp(33px,8vw,43px);
+    margin:6px 0 8px;
+  }
+  body.library-page .library-hero p{font-size:13px;line-height:1.5}
+}
