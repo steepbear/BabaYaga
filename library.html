@@ -8,7 +8,7 @@
   <title>Библиотека вопросов — Баба Яга против!</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/v3.css">
-  <link rel="stylesheet" href="css/library-v4.css">
+  <link rel="stylesheet" href="css/library-v4.css?v=20261102-forest-buttons">
 </head>
 <body class="library-page">
 <header class="site-header"><div class="container nav-wrap">
@@ -26,7 +26,7 @@
     <aside class="library-sidebar">
       <div class="panel side-panel">
         <div class="side-title">БИБЛИОТЕКА</div>
-        <div class="side-link active"><span class="side-icon">✦</span> Генератор вопросов</div>
+        <div class="side-link active"><span class="side-icon">✦</span> Подобрать вопросы</div>
         <a class="side-link" href="questions.html"><span class="side-icon">＋</span> Добавить вопрос</a>
         <a class="side-link" href="questions.html#my-questions"><span class="side-icon">▤</span> Мои вопросы</a>
       </div>
@@ -67,7 +67,7 @@
         <div class="level-legend" aria-label="Сложность вопросов"><span class="difficulty-1">Кубик 1–2 — <strong>Лёгкий</strong></span><span class="difficulty-2">Кубик 3–4 — <strong>Обычный</strong></span><span class="difficulty-3">Кубик 5–6 — <strong>Сложный</strong></span></div>
         <div class="generator-actions"><div class="field"><label for="count-select">Вопросов на каждый уровень каждого предмета</label>
           <select id="count-select"><option value="2" selected>2 (6 на предмет)</option><option value="4">4 (12 на предмет)</option><option value="6">6 (18 на предмет)</option><option value="10">10 (30 на предмет)</option><option value="22">22 (66 на предмет)</option></select></div>
-          <div class="generator-buttons"><button id="generate-btn" type="button" class="btn btn-outline-dark">Сформировать набор</button><button id="generate-game-btn" type="button" class="btn btn-forest">Сформировать игру</button></div>
+          <div class="generator-buttons"><button id="generate-btn" type="button" class="btn btn-generate-soft">Сформировать набор</button><button id="generate-game-btn" type="button" class="btn btn-generate-soft">Сформировать игру</button></div>
         </div>
         <p class="muted-info">Полная игра содержит четыре комплекта. Выбранный источник используется для каждого предмета и уровня сложности.</p>
         <p id="generate-message" class="notice-error" role="status" aria-live="polite"></p>

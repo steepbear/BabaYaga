@@ -144,3 +144,32 @@
  .template-print-page.print-dense .template-print-column-header strong{font-size:7.5pt}
  .template-print-page.print-dense .template-print-column-header span{font-size:6.7pt}
 }
+
+/* Акварельный лес — тот же исходный фон, что на главной странице. */
+body.library-page{
+ background-color:#f9f2e6;
+ background-image:url('../assets/forest-watercolor-bg.webp');
+ background-position:center top;
+ background-size:100% auto;
+ background-repeat:repeat-y;
+}
+body.library-page .library-main{background:transparent}
+/* Одинаковые приглушённые кнопки обеих команд генерации. */
+.library-page .generator-buttons .btn-generate-soft{
+ background:#e0eade;
+ border:1px solid #b5cab6;
+ color:#315741;
+ box-shadow:none;
+}
+.library-page .generator-buttons .btn-generate-soft:hover{
+ background:#d2e1d0;
+ border-color:#9ebba0;
+ color:#234631;
+}
+.library-page .generator-buttons .btn-generate-soft:disabled{
+ background:#e0eade;
+ color:#647868;
+ opacity:.65;
+}
+@media(max-width:680px){body.library-page{background-size:auto 900px}}
+@media print{body.library-page{background:white!important;background-image:none!important}}
