@@ -1,11 +1,7 @@
-
-/* V4 — дополнение к существующему оформлению сайта, только для страницы библиотеки */
+/* Баба Яга против! — библиотека вопросов: дополнение к общим стилям style.css и v3.css */
 [hidden]{display:none!important}
-.planned{opacity:.55;cursor:default;user-select:none}
-.planned small{margin-left:auto;font-size:10px;background:#f4f0e8;color:#879486;border-radius:4px;padding:2px 5px}
 .library-gate .gate-title{display:flex;align-items:flex-start;gap:13px;margin-bottom:20px}
-.gate-title h2{margin-bottom:8px}
-.gate-title .sub{margin:0}
+.gate-title h2{margin-bottom:8px}.gate-title .sub{margin:0}
 .gate-symbol{flex:none;display:grid;place-items:center;width:40px;height:40px;background:#fcf0d8;color:#af8138;border-radius:10px;font:26px Georgia,serif}
 .gate-entry{display:flex;align-items:stretch;gap:10px;margin-top:9px}
 .gate-entry input{flex:1;min-width:0;font-weight:700;letter-spacing:.045em;margin:0}
@@ -16,63 +12,45 @@
 .access-success{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#eaf4e9;color:#24543a;border:1px solid #d1e2ce;border-radius:9px;font-size:13px;font-weight:800}
 .access-success>span{display:grid;place-items:center;border-radius:50%;width:27px;height:27px;background:#356748;color:white}
 .access-success button{margin-left:auto;background:transparent;border:0;color:#356748;text-decoration:underline;text-underline-offset:4px;font-weight:800;cursor:pointer}
-.level-legend{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px}
-.level-legend span{background:#eaf2e9;color:#476a51;border-radius:8px;padding:7px 11px;font-size:12px;font-weight:700}
 .notice-error{color:#974539;font-weight:700;font-size:13px;margin:13px 0 0}
-.result-meta h2{margin-bottom:9px}
-.result-meta .result-actions{align-self:flex-start}
-.result-actions .btn{white-space:nowrap}
-.answer-toggle{border-top:1px dashed #e0dfd5;margin-top:12px;padding-top:9px}
-.answer-toggle summary{font-size:12px;color:#365c44;font-weight:800;cursor:pointer;width:max-content;max-width:100%}
-.answer-toggle summary::marker{color:#b38a46}
-.answer-toggle .answer-text{font-size:13px;font-weight:500;white-space:pre-wrap;overflow-wrap:anywhere;padding-top:8px;color:#566e59}
-.library-page button:focus-visible,.library-page a:focus-visible,.library-page input:focus-visible,.library-page select:focus-visible{outline:3px solid #d5aa56;outline-offset:3px}
-.subject-button:focus-visible{outline-offset:3px}
-@media(max-width:650px){.gate-entry{flex-direction:column}.gate-entry .btn{width:100%}.library-gate .gate-title{gap:10px}.level-legend span{font-size:11px}.result-actions .btn{flex:1}.library-gate{padding:22px}.access-success{flex-wrap:wrap}.access-success button{margin-left:0}}
-@media print{.library-gate,.answer-toggle,.level-legend{display:none!important}.print-result{display:block!important}.result-meta{display:none!important}.print-head{display:block!important}}
 
+/* Источники вопросов */
+.source-select{margin:18px 0 24px}
+.source-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:11px}
+.source-option{display:flex;align-items:flex-start;gap:10px;padding:14px 12px;min-width:0;border:1px solid #deded2;border-radius:10px;background:#fdfbf5;cursor:pointer;transition:border-color .15s,background .15s}
+.source-option:has(input:checked){border:2px solid #285940;background:#e9f2e8;padding:13px 11px}
+.source-option input{margin:3px 0 0;flex:none;accent-color:#285940;width:16px;height:16px}
+.source-option strong{display:block;color:#294d39;font-size:13px;line-height:1.4}
+.source-option small{display:block;color:#6d7a6e;font-size:11px;line-height:1.45;margin-top:5px}
+.teacher-source-note,.teacher-session{margin:10px 0 0;color:#476349;font-size:12px}
+.teacher-session button,.teacher-source-note button{border:0;background:transparent;color:#1c563d;text-decoration:underline;font-weight:800;cursor:pointer;font-size:12px;padding:3px}
 
-/* V5: карточки предметов — персонажи на фоне без дополнительных значков */
-.library-page .subject-tiles .subject-button{
-  position:relative;min-height:96px;gap:2px;line-height:1.5;
-  background-size:cover;background-position:center 42%;
-  font-size:12px;font-weight:800;color:#294736;
-  text-shadow:0 1px 0 #fffcf6,0 0 8px #fffdf9;
-}
-.library-page .subject-button[data-subject="math"]{
-  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_yaga.webp')
-}
-.library-page .subject-button[data-subject="russian"]{
-  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_dragon.webp')
-}
-.library-page .subject-button[data-subject="world"]{
-  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_leshy.webp')
-}
-.library-page .subject-button[data-subject="english"]{
-  background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_cat.webp')
-}
-.library-page .subject-button.active{
-  border:2px solid #245543;
-  box-shadow:inset 0 0 0 1px #245543,0 0 0 2px #24554314
-}
-/* Цвета сложности одинаковы в легенде, заголовках групп и печати */
-.level-legend span{border:1px solid transparent;padding:9px 12px}
-.level-legend .difficulty-1,.level-group[data-level="1"] .level-pill{
-  background:#e4f1e2;color:#315b3c;border-color:#bbd7bd
-}
-.level-legend .difficulty-2,.level-group[data-level="2"] .level-pill{
-  background:#fff0da;color:#8b581e;border-color:#efd1a0
-}
-.level-legend .difficulty-3,.level-group[data-level="3"] .level-pill{
-  background:#f9e3e1;color:#993d3d;border-color:#eabbba
-}
+/* Предметы — без надписанных символов, с портретами на фоне */
+.library-page .subject-tiles .subject-button{position:relative;min-height:96px;gap:2px;line-height:1.5;background-size:cover;background-position:center 42%;font-size:12px;font-weight:800;color:#294736;text-shadow:0 1px 0 #fffcf6,0 0 8px #fffdf9}
+.library-page .subject-button[data-subject="math"]{background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_yaga.webp')}
+.library-page .subject-button[data-subject="russian"]{background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_dragon.webp')}
+.library-page .subject-button[data-subject="world"]{background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_leshy.webp')}
+.library-page .subject-button[data-subject="english"]{background-image:linear-gradient(#fffdf6d9,#fffdf6d9),url('../assets/villain_cat.webp')}
+.library-page .subject-button.active{border:2px solid #245543;box-shadow:inset 0 0 0 1px #245543,0 0 0 2px #24554314}
+
+/* Сложности: мягкий зелёный, оранжевый, красный */
+.level-legend{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px}
+.level-legend span{border:1px solid transparent;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:700}
+.level-legend .difficulty-1,.level-group[data-level="1"] .level-pill{background:#e4f1e2;color:#315b3c;border-color:#bbd7bd}
+.level-legend .difficulty-2,.level-group[data-level="2"] .level-pill{background:#fff0da;color:#8b581e;border-color:#efd1a0}
+.level-legend .difficulty-3,.level-group[data-level="3"] .level-pill{background:#f9e3e1;color:#993d3d;border-color:#eabbba}
 .level-group[data-level="1"]{border-left:4px solid #93c7a0}
 .level-group[data-level="2"]{border-left:4px solid #e9bb71}
 .level-group[data-level="3"]{border-left:4px solid #df9a97}
 .level-group[data-level="1"] .level-group-heading h3{color:#315b3c}
 .level-group[data-level="2"] .level-group-heading h3{color:#8b581e}
 .level-group[data-level="3"] .level-group-heading h3{color:#993d3d}
-/* Отметки, какие вопросы ведущий уже использовал */
+.level-empty{color:#7a887b;font-size:13px;margin:9px 0 18px}
+
+/* Панель результатов */
+.result-meta h2{margin-bottom:9px}
+.result-meta .result-actions{align-self:flex-start}
+.result-actions .btn{white-space:nowrap}
 .asked-progress{display:inline-block;margin-left:8px;padding:6px 12px;border-radius:30px;background:#e7f0e5;color:#326144;font-size:12px;font-weight:800}
 .asked-hint{font-size:12px;color:#657469;line-height:1.65;margin:-5px 0 20px}
 .q-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
@@ -81,94 +59,13 @@
 .q-item.is-asked{background:#eef4e9;border-color:#bbd5c1}
 .q-item.is-asked .question-mark{background:#d5ead6;border-color:#a1cba9}
 .q-item.is-asked .q-number{color:#36734c}
+.answer-toggle{border-top:1px dashed #e0dfd5;margin-top:12px;padding-top:9px}
+.answer-toggle summary{font-size:12px;color:#365c44;font-weight:800;cursor:pointer;width:max-content;max-width:100%}
+.answer-toggle summary::marker{color:#b38a46}
+.answer-toggle .answer-text{font-size:13px;font-weight:500;white-space:pre-wrap;overflow-wrap:anywhere;padding-top:8px;color:#566e59}
 .print-inline-answer,.print-question-mark{display:none}
-@media(max-width:650px){
-  .library-page .subject-tiles .subject-button{min-height:102px;font-size:11px}
-  .asked-progress{display:block;margin:8px 0 0;width:max-content}
-  .q-top .question-mark{margin-left:0}
-}
-@media print{
-  /* Печать карточек на планшеты: ответ рядом с вопросом, без отдельного листа */
-  .library-page .print-inline-answer{display:block!important;margin-top:8px;padding-top:7px;border-top:1px dotted #bbb;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
-  .library-page .print-question-mark{display:inline-block!important;margin-left:auto;white-space:nowrap;font-size:12px;color:#222}
-  .library-page .answer-toggle,.library-page .question-mark,.library-page .asked-hint,.library-page .asked-progress,.library-page .result-meta{display:none!important}
-  .library-page .level-group{border-left:3px solid #777;padding-left:10px}
-  .library-page .level-group[data-level="1"]{border-left-color:#85b18e}
-  .library-page .level-group[data-level="2"]{border-left-color:#d4a35f}
-  .library-page .level-group[data-level="3"]{border-left-color:#c78080}
-  .library-page .q-item{break-inside:avoid;page-break-inside:avoid}
-  .library-page .q-item.is-asked{background:white!important}
-  .library-page .q-top{display:flex!important}
-}
 
-/* Печать в стиле оригинальных шаблонов: 3 колонки, до 22 вопросов каждого уровня на A4. */
-.template-print-pages{display:none}
-@page{size:A4 portrait;margin:8mm}
-@media print{
-  html,body{width:100%;margin:0!important;padding:0!important}
-  .library-page .site-header,
-  .library-page main,
-  .library-page .footer{display:none!important}
-  .library-page .template-print-pages{display:block!important}
-  .template-print-page{
-    display:block!important;width:100%;color:#202c25;
-    font:8pt/1.15 Arial,sans-serif;
-    break-after:page;page-break-after:always
-  }
-  .template-print-page:last-child{break-after:auto;page-break-after:auto}
-  .template-print-top{
-    display:flex;justify-content:space-between;align-items:end;
-    border-bottom:.25mm solid #c5cdc4;padding-bottom:2mm;margin-bottom:2mm
-  }
-  .template-print-top h2{font:bold 12pt/1.2 Georgia,serif;margin:0}
-  .template-print-top>div{font-size:8pt}
-  .template-print-columns{
-    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:2.2mm;align-items:start
-  }
-  .template-print-column{
-    min-width:0;border:.2mm solid #bdc8be;border-radius:2mm;
-    overflow:visible;break-inside:auto
-  }
-  .template-print-column-header{
-    height:14mm;display:flex;gap:1.5mm;align-items:center;padding:1.5mm;
-    background:#e8f1e6;print-color-adjust:exact;-webkit-print-color-adjust:exact
-  }
-  .template-print-column.difficulty-2 .template-print-column-header{background:#fff0da}
-  .template-print-column.difficulty-3 .template-print-column-header{background:#f9e3e1}
-  .template-print-column-header img{width:10mm;height:10mm;object-fit:contain;flex:none}
-  .template-print-column-header strong{display:block;font-size:8pt}
-  .template-print-column-header span{display:block;font-size:7pt;color:#55665a}
-  .template-print-table{
-    width:100%;border-collapse:collapse;table-layout:fixed;
-    font-size:8pt;line-height:1.15
-  }
-  .template-print-table th,.template-print-table td{
-    border:.2mm solid #b8c3b9;vertical-align:top;
-    padding:.8mm .5mm;overflow-wrap:anywhere;word-break:normal;white-space:pre-wrap
-  }
-  .template-print-table tr{break-inside:avoid;page-break-inside:avoid}
-  .template-print-table th{background:#f0f4f0;font-size:7pt;font-weight:700}
-  .template-print-table th:nth-child(1){width:8%}
-  .template-print-table th:nth-child(2){width:50%}
-  .template-print-table th:nth-child(3){width:31%}
-  .template-print-table th:nth-child(4){width:11%}
-  .template-print-table .number-cell{text-align:center;font-weight:700}
-  .template-print-table .marked-cell{text-align:center;font-size:10pt}
-  .template-print-page.print-medium .template-print-table{font-size:7.6pt;line-height:1.12}
-  .template-print-page.print-compact .template-print-table{font-size:7pt;line-height:1.12}
-  .template-print-page.print-dense .template-print-table{font-size:6.4pt;line-height:1.1}
-  .template-print-page.print-medium .template-print-table td,
-  .template-print-page.print-compact .template-print-table td{padding:.7mm .45mm}
-  .template-print-page.print-dense .template-print-table td{padding:.55mm .4mm}
-  .template-print-page.print-dense .template-print-column-header{height:12mm}
-  .template-print-page.print-dense .template-print-column-header img{width:8mm;height:8mm}
-  .template-print-page.print-dense .template-print-column-header strong{font-size:7.5pt}
-  .template-print-page.print-dense .template-print-column-header span{font-size:6.7pt}
-}
-
-
-/* V6: отдельный набор или игра из четырёх предметов */
+/* Набор одного предмета / игра из четырёх */
 .library-page .generator-actions>.field{max-width:245px}
 .library-page .generator-actions>.generator-buttons{display:flex;gap:10px;flex:1;max-width:none;align-items:stretch}
 .library-page .generator-buttons .btn{flex:1;min-width:0}
@@ -176,6 +73,74 @@
 .result-subject-tab{min-height:60px;border:1px solid #d9ddd0;border-radius:10px;background:#fcfaf4;color:#34503d;font-size:12px;font-weight:800;padding:10px 12px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;text-align:left;cursor:pointer}
 .result-subject-tab.active{border:2px solid #23543e;background:#e8f1e8;box-shadow:0 0 0 2px #dceadc}
 .result-tab-counter{font-size:11px;color:#5b795e;font-weight:700}
-.library-page .result-subject-tab:focus-visible{outline:3px solid #d5aa56;outline-offset:2px}
+.library-page button:focus-visible,.library-page a:focus-visible,.library-page input:focus-visible,.library-page select:focus-visible{outline:3px solid #d5aa56;outline-offset:3px}
+
+/* Вход преподавателя во всплывающем окне */
+.teacher-modal[hidden]{display:none!important}
+.teacher-modal{position:fixed;inset:0;z-index:1100;display:grid;place-items:center;padding:18px}
+.teacher-modal-backdrop{position:absolute;inset:0;background:#071e17c9}
+.teacher-modal-dialog{position:relative;box-sizing:border-box;width:min(100%,420px);max-height:95vh;overflow-y:auto;background:#fffdf7;border-radius:15px;padding:30px;box-shadow:0 20px 65px #0006}
+.teacher-modal-dialog h2{font:700 28px Georgia,serif;color:#183b2c;margin:0 0 10px}
+.teacher-modal-dialog p,.teacher-modal-dialog>a{font-size:13px;line-height:1.55;color:#607466}
+.teacher-modal-dialog form{display:grid;gap:14px;margin:20px 0}
+.teacher-modal-dialog label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#314c39}
+.teacher-modal-dialog input{border:1px solid #cbd4c8;background:white;border-radius:8px;padding:12px;width:100%;box-sizing:border-box}
+.teacher-modal-dialog .btn{width:100%}
+.teacher-modal-close{position:absolute;right:14px;top:10px;border:0;background:transparent;font-size:28px;cursor:pointer}
+#teacher-modal-status{color:#a4463b}
+
 @media(max-width:900px){.library-page .generator-actions{align-items:stretch;flex-direction:column}.library-page .generator-actions>.field{max-width:100%}}
-@media(max-width:650px){.library-page .generator-actions>.generator-buttons{flex-direction:column}.library-page .result-subject-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.library-page .result-subject-tab{min-height:55px}}
+@media(max-width:680px){.source-options{grid-template-columns:1fr}}
+@media(max-width:650px){
+ .gate-entry{flex-direction:column}.gate-entry .btn{width:100%}
+ .library-gate .gate-title{gap:10px}.library-gate{padding:22px}
+ .level-legend span{font-size:11px}.result-actions .btn{flex:1}
+ .access-success{flex-wrap:wrap}.access-success button{margin-left:0}
+ .library-page .subject-tiles .subject-button{min-height:102px;font-size:11px}
+ .asked-progress{display:block;margin:8px 0 0;width:max-content}
+ .q-top .question-mark{margin-left:0}
+ .library-page .generator-actions>.generator-buttons{flex-direction:column}
+ .result-subject-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .result-subject-tab{min-height:55px}
+}
+
+/* Печать по шаблонам преподавателей: три уровня в три колонки, до 22 вопросов. */
+.template-print-pages{display:none}
+@page{size:A4 portrait;margin:8mm}
+@media print{
+ html,body{width:100%;margin:0!important;padding:0!important}
+ .library-page .site-header,.library-page main,.library-page .footer,.library-page .teacher-modal{display:none!important}
+ .library-page .template-print-pages{display:block!important}
+ .template-print-page{display:block!important;width:100%;color:#202c25;font:8pt/1.15 Arial,sans-serif;break-after:page;page-break-after:always}
+ .template-print-page:last-child{break-after:auto;page-break-after:auto}
+ .template-print-top{display:flex;justify-content:space-between;align-items:end;border-bottom:.25mm solid #c5cdc4;padding-bottom:2mm;margin-bottom:2mm}
+ .template-print-top h2{font:bold 12pt/1.2 Georgia,serif;margin:0}
+ .template-print-top>div{font-size:8pt}
+ .template-print-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.2mm;align-items:start}
+ .template-print-column{min-width:0;border:.2mm solid #bdc8be;border-radius:2mm;overflow:visible;break-inside:auto}
+ .template-print-column-header{height:14mm;display:flex;gap:1.5mm;align-items:center;padding:1.5mm;background:#e8f1e6;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .template-print-column.difficulty-2 .template-print-column-header{background:#fff0da}
+ .template-print-column.difficulty-3 .template-print-column-header{background:#f9e3e1}
+ .template-print-column-header img{width:10mm;height:10mm;object-fit:contain;flex:none}
+ .template-print-column-header strong{display:block;font-size:8pt}
+ .template-print-column-header span{display:block;font-size:7pt;color:#55665a}
+ .template-print-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8pt;line-height:1.15}
+ .template-print-table th,.template-print-table td{border:.2mm solid #b8c3b9;vertical-align:top;padding:.8mm .5mm;overflow-wrap:anywhere;word-break:normal;white-space:pre-wrap}
+ .template-print-table tr{break-inside:avoid;page-break-inside:avoid}
+ .template-print-table th{background:#f0f4f0;font-size:7pt;font-weight:700}
+ .template-print-table th:nth-child(1){width:8%}
+ .template-print-table th:nth-child(2){width:50%}
+ .template-print-table th:nth-child(3){width:31%}
+ .template-print-table th:nth-child(4){width:11%}
+ .template-print-table .number-cell{text-align:center;font-weight:700}
+ .template-print-table .marked-cell{text-align:center;font-size:10pt}
+ .template-print-page.print-medium .template-print-table{font-size:7.6pt;line-height:1.12}
+ .template-print-page.print-compact .template-print-table{font-size:7pt;line-height:1.12}
+ .template-print-page.print-dense .template-print-table{font-size:6.4pt;line-height:1.1}
+ .template-print-page.print-medium .template-print-table td,.template-print-page.print-compact .template-print-table td{padding:.7mm .45mm}
+ .template-print-page.print-dense .template-print-table td{padding:.55mm .4mm}
+ .template-print-page.print-dense .template-print-column-header{height:12mm}
+ .template-print-page.print-dense .template-print-column-header img{width:8mm;height:8mm}
+ .template-print-page.print-dense .template-print-column-header strong{font-size:7.5pt}
+ .template-print-page.print-dense .template-print-column-header span{font-size:6.7pt}
+}
