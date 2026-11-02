@@ -100,3 +100,34 @@
   .library-page .q-item.is-asked{background:white!important}
   .library-page .q-top{display:flex!important}
 }
+
+/* Печатные листы по четырём Excel-шаблонам: три колонки с ответами и отметкой */
+.template-print-pages{display:none}
+@page{size:A4 portrait;margin:9mm}
+@media print{
+ html,body{width:100%;margin:0!important;padding:0!important}
+ .library-page .site-header,.library-page main,.library-page .footer{display:none!important}
+ .library-page .template-print-pages{display:block!important}
+ .template-print-page{display:block!important;width:100%;break-after:page;page-break-after:always;color:#202c25;font:9pt/1.25 Arial,sans-serif}
+ .template-print-page:last-child{break-after:auto;page-break-after:auto}
+ .template-print-top{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #bec7bd;padding-bottom:4mm;margin-bottom:4mm}
+ .template-print-top h2{font:bold 13pt/1.2 Georgia,serif;margin:0}
+ .template-print-top>div{font-size:8pt}
+ .template-print-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.7mm;align-items:start}
+ .template-print-column{min-width:0;border:1px solid #bdc8be;border-radius:2mm;overflow:hidden;break-inside:avoid}
+ .template-print-column-header{height:17mm;display:flex;gap:2mm;align-items:center;padding:2mm;background:#e8f1e6;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .template-print-column.difficulty-2 .template-print-column-header{background:#fff0da}
+ .template-print-column.difficulty-3 .template-print-column-header{background:#f9e3e1}
+ .template-print-column-header img{width:13mm;height:13mm;object-fit:contain;flex:none}
+ .template-print-column-header strong{display:block;font-size:9pt}
+ .template-print-column-header span{display:block;font-size:8pt;color:#55665a}
+ .template-print-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8pt}
+ .template-print-table th,.template-print-table td{border:1px solid #b8c3b9;vertical-align:top;padding:1.5mm .8mm;overflow-wrap:anywhere;word-break:normal;white-space:pre-wrap}
+ .template-print-table th{background:#f0f4f0;font-size:7.5pt;font-weight:700}
+ .template-print-table th:nth-child(1){width:8%}
+ .template-print-table th:nth-child(2){width:48%}
+ .template-print-table th:nth-child(3){width:33%}
+ .template-print-table th:nth-child(4){width:11%}
+ .template-print-table .number-cell{text-align:center;font-weight:700}
+ .template-print-table .marked-cell{text-align:center;font-size:12pt}
+}

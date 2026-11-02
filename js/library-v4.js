@@ -152,7 +152,52 @@ $('#reset-asked').addEventListener('click',()=>{
  updateAskedProgress();saveGame();
 });
 $('#toggle-answers').addEventListener('click',()=>{const all=$$('.answer-toggle'),open=all.some(x=>!x.open);all.forEach(x=>x.open=open);syncAnswers()});
-$('#print-btn').addEventListener('click',()=>{if(generated.length)window.print()});
+
+const PRINT_ART={math:'assets/template-yaga.webp',russian:'assets/template-dragon.webp',world:'assets/template-leshy.webp',english:'assets/template-cat.webp'};
+function prepareTemplatePrint(){
+ const host=$('#template-print-pages');host.replaceChildren();
+ if(!currentGame||!currentGame.sets)return;
+ const sets=currentGame.sets;
+ // The original spreadsheet contains 22 rows per difficulty; print in groups of seven
+ // so long questions remain readable at true A4 size.
+ const max=Math.max(...sets.map(a=>a.length));
+ const pageSize=7;
+ for(let offset=0;offset<max;offset+=pageSize){
+  const page=node('section','template-print-page');
+  const top=node('header','template-print-top');
+  top.append(node('h2','','«Баба Яга против!» — '+NAMES[currentGame.subject]),node('div','',''+currentGame.grade+' класс · Лист '+(Math.floor(offset/pageSize)+1)));
+  page.append(top);
+  const cols=node('div','template-print-columns');
+  for(let level=1;level<=3;level++){
+   const col=node('section','template-print-column difficulty-'+level);
+   const h=node('header','template-print-column-header');
+   const img=node('img');img.src=PRINT_ART[currentGame.subject];img.alt='';img.width=38;img.height=38;
+   const title=node('div');
+   title.append(node('strong','',level===1?'Лёгкие вопросы':level===2?'Обычные вопросы':'Сложные вопросы'),
+     node('span','','Кубик '+DICE[level]));
+   h.append(img,title);col.append(h);
+   const tbl=node('table','template-print-table');
+   const thead=node('thead'),tr=node('tr');
+   for(const label of ['№','Вопрос','Ответ','Задано'])tr.append(node('th','',label));
+   thead.append(tr);tbl.append(thead);
+   const tbody=node('tbody');
+   for(let x=offset;x<Math.min(offset+pageSize,max);x++){
+    const q=sets[level-1][x],row=node('tr','');
+    if(q){
+      row.append(node('td','number-cell',x+1),node('td','question-cell',q.question_text),
+        node('td','answer-cell',q.answer_text),node('td','marked-cell',asked.has(q.id)?'☑':'□'));
+    }else{
+      for(let k=0;k<4;k++)row.append(node('td','',k===3?'□':''));
+    }
+    tbody.append(row);
+   }
+   tbl.append(tbody);col.append(tbl);cols.append(col);
+  }
+  page.append(cols);host.append(page);
+ }
+}
+
+$('#print-btn').addEventListener('click',()=>{if(generated.length){prepareTemplatePrint();window.print()}});
 const saved=restore();
 if(saved){$('#access-code').value=saved;login()}
 })();
