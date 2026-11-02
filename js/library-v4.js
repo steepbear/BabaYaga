@@ -214,8 +214,8 @@ function render(){
 function applyDifficultyFilter(){
  if(!currentGame)return;
  const level=['all','1','2','3'].includes(difficultyFilters[activeSubject])?difficultyFilters[activeSubject]:'all';
- $('.difficulty-filter-btn').forEach(b=>{const on=b.dataset.difficulty===level;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on))});
- $('#question-output .level-group').forEach(g=>{g.hidden=level!=='all'&&g.dataset.level!==level});
+ $$('.difficulty-filter-btn').forEach(b=>{const on=b.dataset.difficulty===level;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on))});
+ $$('#question-output .level-group').forEach(g=>{g.hidden=level!=='all'&&g.dataset.level!==level});
  const levels=setsFor(activeSubject),total=levels.reduce((n,rows)=>n+rows.length,0);
  const shown=level==='all'?total:levels[Number(level)-1].length;
  say('#difficulty-filter-count','Показано: '+shown+' из '+total);
@@ -350,7 +350,7 @@ $('#reshuffle-btn').addEventListener('click',()=>{
  if(!currentGame)return;generate(currentGame.mode,true,currentGame.source,currentGame.subject||activeSubject);
 });
 $('#reset-asked').addEventListener('click',resetAsked);
-$('.difficulty-filter-btn').forEach(b=>b.addEventListener('click',()=>{if(!currentGame)return;difficultyFilters[activeSubject]=b.dataset.difficulty;applyDifficultyFilter();storeGame()}));
+$$('.difficulty-filter-btn').forEach(b=>b.addEventListener('click',()=>{if(!currentGame)return;difficultyFilters[activeSubject]=b.dataset.difficulty;applyDifficultyFilter();storeGame()}));
 $('#toggle-answers').addEventListener('click',()=>{const all=$$('.answer-toggle'),open=all.some(item=>!item.open);all.forEach(item=>item.open=open);syncAnswers()});
 $('#print-btn').addEventListener('click',()=>{if(currentGame&&totalCount()){prepareTemplatePrint();window.print()}});
 $('#teacher-modal-close').addEventListener('click',()=>closeTeacherModal(false));
