@@ -27,7 +27,7 @@ function restoreGame(){
  try{
   const value=sessionStorage.getItem(GAME_KEY);if(!value)return;
   const g=JSON.parse(value);
-  if(g.code!==code||g.grade!==2||!NAMES[g.subject]||![2,4,6,10].includes(g.perLevel)
+  if(g.code!==code||g.grade!==2||!NAMES[g.subject]||![2,4,6,10,22].includes(g.perLevel)
       ||!Array.isArray(g.sets)||g.sets.length!==3||!g.sets.every(Array.isArray))return;
   subject=g.subject;generated=g.sets;asked=new Set(Array.isArray(g.asked)?g.asked:[]);
   currentGame={sets:g.sets,grade:g.grade,subject:g.subject,perLevel:g.perLevel};
@@ -158,12 +158,16 @@ function prepareTemplatePrint(){
  const host=$('#template-print-pages');document.body.append(host);host.replaceChildren();
  if(!currentGame||!currentGame.sets)return;
  const sets=currentGame.sets;
- // The original spreadsheet contains 22 rows per difficulty; print in groups of seven
- // so long questions remain readable at true A4 size.
+ // One printed sheet can contain up to 22 questions for each of the three difficulty levels.
+ // Additional pages are created only when a set has more than 22 questions per level.
  const max=Math.max(...sets.map(a=>a.length));
- const pageSize=7;
+ const pageSize=22;
  for(let offset=0;offset<max;offset+=pageSize){
   const page=node('section','template-print-page');
+  const pageRows=sets.flatMap(rows=>rows.slice(offset,offset+pageSize));
+  const meanLength=pageRows.reduce((sum,q)=>sum+String(q.question_text||'').length,0)/Math.max(1,pageRows.length);
+  const count=Math.min(pageSize,max-offset);
+  page.classList.add(count<=10?'print-roomy':count<=17?'print-medium':meanLength>55?'print-dense':'print-compact');
   const top=node('header','template-print-top');
   top.append(node('h2','','«Баба Яга против!» — '+NAMES[currentGame.subject]),node('div','',''+currentGame.grade+' класс · Лист '+(Math.floor(offset/pageSize)+1)));
   page.append(top);
