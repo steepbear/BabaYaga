@@ -1,0 +1,28 @@
+/* Watercolor forest background for the school project's landing page.
+   Uses the user's supplied artwork, without redrawing or cropping the asset. */
+body.home-page{
+  background-color:#f9f2e6;
+  background-image:url('../assets/forest-watercolor-bg.webp');
+  background-position:center top;
+  background-size:100% auto;
+  background-repeat:repeat-y;
+}
+/* Keep the dark hero and the forest gameplay section; reveal the paper
+   background behind the pale sections, preserving readable solid cards. */
+body.home-page .paper-section,
+body.home-page .library-promo,
+body.home-page .access-section,
+body.home-page .project-section,
+body.home-page .gameplay-facts{
+  background:transparent;
+  background-image:none;
+}
+/* Single board presentation, not a multi-variant selector. */
+body.home-page .board-variants .variant-image{min-width:0}
+body.home-page .board-variants .variant-image img{display:block;width:100%;height:auto}
+@media(max-width:680px){
+  body.home-page{background-size:auto 900px}
+}
+@media print{
+  body.home-page{background:white!important}
+}
