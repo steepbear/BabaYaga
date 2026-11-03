@@ -8,7 +8,7 @@
   <title>Библиотека вопросов — Баба Яга против!</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/v3.css">
-  <link rel="stylesheet" href="css/library-v4.css?v=20261102-difficulty-filter">
+  <link rel="stylesheet" href="css/library-v4.css?v=20261103-personal-topics">
 </head>
 <body class="library-page">
 <header class="site-header"><div class="container nav-wrap">
@@ -64,6 +64,16 @@
             <button class="subject-button" data-subject="english" type="button" aria-pressed="false">Английский язык<br>Кот учёный</button>
           </div>
         </div>
+        <div id="private-topics" class="private-topics" hidden>
+          <div class="private-topics-heading"><span class="field-title">Темы личных вопросов</span><span class="private-topics-hint">Необязательно — по умолчанию все темы</span></div>
+          <div class="private-topic-grid">
+            <label class="private-topic-field">Математика<select data-private-topic="math" aria-label="Тема математики"><option value="">Все темы</option></select></label>
+            <label class="private-topic-field">Русский язык<select data-private-topic="russian" aria-label="Тема русского языка"><option value="">Все темы</option></select></label>
+            <label class="private-topic-field">Окружающий мир<select data-private-topic="world" aria-label="Тема окружающего мира"><option value="">Все темы</option></select></label>
+            <label class="private-topic-field">Английский язык<select data-private-topic="english" aria-label="Тема английского языка"><option value="">Все темы</option></select></label>
+          </div>
+          <p id="private-topics-message" class="private-topics-message" role="status" aria-live="polite"></p>
+        </div>
         <div class="level-legend" aria-label="Сложность вопросов"><span class="difficulty-1">Кубик 1–2 — <strong>Лёгкий</strong></span><span class="difficulty-2">Кубик 3–4 — <strong>Обычный</strong></span><span class="difficulty-3">Кубик 5–6 — <strong>Сложный</strong></span></div>
         <div class="generator-actions"><div class="field"><label for="count-select">Вопросов на каждый уровень каждого предмета</label>
           <select id="count-select"><option value="2" selected>2 (6 на предмет)</option><option value="4">4 (12 на предмет)</option><option value="6">6 (18 на предмет)</option><option value="10">10 (30 на предмет)</option><option value="22">22 (66 на предмет)</option></select></div>
@@ -99,6 +109,6 @@
 </div>
 <script src="js/common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
-<script src="js/library-v4.js?v=20261102-difficulty-click-fix"></script>
+<script src="js/library-v4.js?v=20261103-personal-topics"></script>
 </body>
 </html>
