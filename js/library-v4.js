@@ -11,6 +11,7 @@ const SOURCES={editorial:'Редакционные',community:'Пользова�
 const PRINT_ART={math:'assets/template-yaga.webp',russian:'assets/template-dragon.webp',world:'assets/template-leshy.webp',english:'assets/template-cat.webp'};
 let code='',subject='math',source='editorial',busy=false,controller=null,currentGame=null,activeSubject='math',asked=new Set(),difficultyFilters={};
 let teacherClient=null,teacher=null,teacherReady=null,modalResolve=null,lastFocus=null;
+let personalTopicsByGrade={},topicsLoadId=0;
 
 function el(tag,cls,value){const element=document.createElement(tag);if(cls)element.className=cls;if(value!==undefined)element.textContent=String(value);return element}
 function say(selector,value){const element=$(selector);if(element)element.textContent=value||''}
@@ -63,17 +64,76 @@ function syncGradeOptions(){
  }
  if(editorial)$('#grade-select').value='2';
 }
+function personalTopicSelection(grade,name){
+ return personalTopicsByGrade[grade]?.[name]||'';
+}
+function clearPersonalTopicControls(){
+ for(const select of $$('[data-private-topic]')){
+  select.replaceChildren(new Option('Все темы',''));
+  select.disabled=true;
+ }
+}
+async function loadPersonalTopics(){
+ const id=++topicsLoadId;
+ const panel=$('#private-topics');
+ panel.hidden=source!=='private';
+ if(panel.hidden){say('#private-topics-message','');return}
+ clearPersonalTopicControls();
+ if(!teacher||!teacherClient){
+  say('#private-topics-message','Войдите как преподаватель, чтобы выбрать свои темы.');
+  return;
+ }
+ const grade=Number($('#grade-select').value),owner=teacher.id;
+ say('#private-topics-message','Загружаем темы…');
+ try{
+  const found=[];
+  for(let from=0;from<10000;from+=1000){
+   const {data,error}=await teacherClient.from('questions')
+    .select('subject_id,topic')
+    .eq('owner_id',owner).eq('kind','private').eq('grade',grade)
+    .not('topic','is',null).order('topic',{ascending:true})
+    .range(from,from+999);
+   if(error)throw error;
+   if(id!==topicsLoadId||source!=='private'||teacher?.id!==owner||Number($('#grade-select').value)!==grade)return;
+   found.push(...(data||[]));
+   if(!data||data.length<1000)break;
+  }
+  const bySubject=Object.fromEntries(SUBJECTS.map(name=>[name,new Set()]));
+  for(const item of found){
+   const name=String(item.subject_id||'');
+   const topic=String(item.topic||'').trim();
+   if(bySubject[name]&&topic)bySubject[name].add(topic);
+  }
+  let count=0;
+  for(const select of $$('[data-private-topic]')){
+   const name=select.dataset.privateTopic;
+   const topics=[...bySubject[name]].sort((a,b)=>a.localeCompare(b,'ru'));
+   select.replaceChildren(new Option('Все темы',''));
+   for(const topic of topics)select.add(new Option(topic,topic));
+   const previous=personalTopicSelection(grade,name);
+   if(topics.includes(previous))select.value=previous;
+   else if(personalTopicsByGrade[grade])delete personalTopicsByGrade[grade][name];
+   select.disabled=false;
+   count+=topics.length;
+  }
+  say('#private-topics-message',count?'Если тема не выбрана, используются все ваши вопросы.':'Для этого класса личные темы пока не созданы.');
+ }catch(error){
+  if(id!==topicsLoadId)return;
+  say('#private-topics-message','Не удалось загрузить темы: '+(error.message||'ошибка подключения'));
+ }
+}
 function displayTeacher(){
  const logged=!!teacher;
  $('#teacher-session').hidden=!logged;$('#teacher-source-note').hidden=logged||source!=='private';
  say('#teacher-session-text',logged?'Вы вошли как '+(teacher.email||'преподаватель'):'');
+ if(source==='private')loadPersonalTopics();
 }
 async function initTeacher(){
  if(!window.supabase?.createClient){displayTeacher();return null}
  teacherClient=window.supabase.createClient(PROJECT_URL,API_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
  teacherClient.auth.onAuthStateChange((event,session)=>{
   if(event==='SIGNED_OUT'){
-   teacher=null;
+   teacher=null;personalTopicsByGrade={};
    if(currentGame?.source==='private')forgetGame();
    displayTeacher();
   }else if(['SIGNED_IN','TOKEN_REFRESHED','USER_UPDATED'].includes(event)){
@@ -111,14 +171,15 @@ async function ensureTeacher(){
  await getTeacherToken();
 }
 
-async function fetchLevel(access,grade,name,difficulty,count,signal,requestedSource='editorial',token=null){
+async function fetchLevel(access,grade,name,difficulty,count,signal,requestedSource='editorial',token=null,selectedTopic=''){
  if(requestedSource==='private'){
   if(!token||!teacherClient||!teacher)throw Error('Необходима авторизация преподавателя.');
-  const {data,error}=await teacherClient.from('questions')
+  let query=teacherClient.from('questions')
    .select('id,subject_id,grade,difficulty,topic,question_text,answer_text,kind')
    .eq('kind','private').eq('owner_id',teacher.id)
-   .eq('grade',grade).eq('subject_id',name).eq('difficulty',difficulty)
-   .limit(1000).abortSignal(signal);
+   .eq('grade',grade).eq('subject_id',name).eq('difficulty',difficulty);
+  if(selectedTopic)query=query.eq('topic',selectedTopic);
+  const {data,error}=await query.limit(1000).abortSignal(signal);
   if(error)throw Error('Не удалось загрузить личные вопросы: '+error.message);
   const found=[...(data||[])];
   for(let i=found.length-1;i>0;i--){const k=Math.floor(Math.random()*(i+1));[found[i],found[k]]=[found[k],found[i]]}
@@ -278,10 +339,13 @@ async function generate(mode,scroll,requestedSource=source,requestedSubject=subj
   catch(error){if(error.message!=='Вход отменён.')say('#generate-message',error.message);return}
  }
  const names=mode==='game'?SUBJECTS:[requestedSubject];
+ const selectedTopics=Object.fromEntries(names.map(name=>[
+  name,requestedSource==='private'?personalTopicSelection(grade,name):''
+ ]));
  await runRequest(async signal=>{
   say('#generate-message','Формируем '+(mode==='game'?'четыре комплекта вопросов…':'подборку вопросов…'));
   const pairs=await Promise.all(names.map(async name=>[
-   name,await Promise.all([1,2,3].map(difficulty=>fetchLevel(code,grade,name,difficulty,perLevel,signal,requestedSource,accessToken)))
+   name,await Promise.all([1,2,3].map(difficulty=>fetchLevel(code,grade,name,difficulty,perLevel,signal,requestedSource,accessToken,selectedTopics[name])))
   ]));
   if(signal.aborted)return;
   const data=Object.fromEntries(pairs);asked.clear();difficultyFilters={};
@@ -340,10 +404,19 @@ $('#change-code').addEventListener('click',()=>{
 });
 $$('.subject-button').forEach(button=>button.addEventListener('click',()=>selectSubject(button.dataset.subject)));
 $$('input[name="question-source"]').forEach(input=>input.addEventListener('change',()=>{
- source=input.value;syncGradeOptions();displayTeacher();if(source==='private'&&!teacher){checkTeacherReady().then(()=>{if(!teacher)return openTeacherModal()}).catch(()=>{})}
+ source=input.value;syncGradeOptions();displayTeacher();$('#private-topics').hidden=source!=='private';
+ if(source==='private'&&!teacher){checkTeacherReady().then(()=>{if(!teacher)return openTeacherModal()}).catch(()=>{})}
 }));
 $('#open-teacher-login').addEventListener('click',()=>{checkTeacherReady().then(()=>openTeacherModal()).catch(()=>{})});
-$('#grade-select').addEventListener('change',()=>say('#generate-message',''));
+$('#grade-select').addEventListener('change',()=>{
+ say('#generate-message','');
+ if(source==='private')loadPersonalTopics();
+});
+$$('[data-private-topic]').forEach(select=>select.addEventListener('change',()=>{
+ const grade=Number($('#grade-select').value);
+ personalTopicsByGrade[grade]??={};
+ personalTopicsByGrade[grade][select.dataset.privateTopic]=select.value;
+}));
 $('#generate-btn').addEventListener('click',()=>generate('set',true));
 $('#generate-game-btn').addEventListener('click',()=>generate('game',true));
 $('#reshuffle-btn').addEventListener('click',()=>{
@@ -369,7 +442,7 @@ $('#teacher-sign-out').addEventListener('click',async()=>{
  if(!teacherClient)return;
  const {error}=await teacherClient.auth.signOut();
  if(error){say('#generate-message',error.message);return}
- teacher=null;if(currentGame?.source==='private')forgetGame();displayTeacher();
+ teacher=null;personalTopicsByGrade={};if(currentGame?.source==='private')forgetGame();displayTeacher();
 });
 syncGradeOptions();
 teacherReady=initTeacher().catch(()=>{teacher=null;displayTeacher()});
