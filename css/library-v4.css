@@ -207,3 +207,19 @@ body.library-page .library-hero p{
 .library-page .level-group[hidden]{display:none!important}
 @media(max-width:650px){.library-page .difficulty-filter-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.library-page .result-difficulty-filter{display:none!important}}
+
+/* Личные вопросы: отдельная необязательная тема для каждого предмета. */
+.library-page .private-topics{
+  margin:19px 0 7px;padding:17px;
+  border:1px solid #d8e2d4;border-radius:12px;
+  background:#f7faf3;
+}
+.library-page .private-topics-heading{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:12px}
+.library-page .private-topics-hint{font-size:12px;color:#718273}
+.library-page .private-topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.library-page .private-topic-field{display:grid;gap:7px;color:#435e49;font-size:12px;font-weight:700}
+.library-page .private-topic-field select{width:100%;min-width:0;min-height:42px;border:1px solid #ccd8c9;border-radius:8px;background:#fff;color:#2b4d37;padding:9px 11px;font-size:13px}
+.library-page .private-topic-field select:disabled{background:#eee;color:#8b948c}
+.library-page .private-topics-message{margin:10px 0 0;font-size:12px;line-height:1.4;color:#63806b}
+@media(max-width:650px){.library-page .private-topic-grid{grid-template-columns:1fr}.library-page .private-topics{padding:13px}}
+@media print{.library-page .private-topics{display:none!important}}
