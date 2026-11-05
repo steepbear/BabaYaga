@@ -26,3 +26,12 @@ body.home-page .board-variants .variant-image img{display:block;width:100%;heigh
 @media print{
   body.home-page{background:white!important}
 }
+
+/* Актуальный макет подбора вопросов из утверждённой иллюстрации. */
+body.home-page .promo-visual{padding:15px 7px 26px}
+body.home-page .promo-visual .library-preview-image{
+  display:block;width:100%;height:auto;
+  transform:rotate(-1deg);
+  filter:drop-shadow(0 11px 14px rgba(42,38,30,.12));
+}
+@media(max-width:680px){body.home-page .promo-visual{padding:10px 4px 20px}}
