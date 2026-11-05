@@ -21,8 +21,8 @@ function setBusy(value){
   const button=$('#'+id);if(button)button.disabled=value;
  }
  $('#access-submit').textContent=value&&!code?'Проверяем…':'Открыть библиотеку →';
- $('#generate-btn').textContent=value?'Загрузка…':'Сформировать набор';
- $('#generate-game-btn').textContent=value?'Загрузка…':'Сформировать игру';
+ $('#generate-btn .generate-btn-label').textContent=value?'Загрузка…':'Сформировать набор';
+ $('#generate-game-btn .generate-btn-label').textContent=value?'Загрузка…':'Сформировать игру';
 }
 function savedCode(){try{return sessionStorage.getItem(SESSION_KEY)||''}catch{return ''}}
 function storeCode(value){try{if(value)sessionStorage.setItem(SESSION_KEY,value);else sessionStorage.removeItem(SESSION_KEY)}catch{}}

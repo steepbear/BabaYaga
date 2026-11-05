@@ -9,7 +9,7 @@
   <title>Библиотека вопросов — Баба Яга против!</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/v3.css">
-  <link rel="stylesheet" href="css/library-v4.css?v=20261103-personal-topics">
+  <link rel="stylesheet" href="css/library-v4.css?v=20261105-generate-icons">
 </head>
 <body class="library-page">
 <header class="site-header"><div class="container nav-wrap">
@@ -78,7 +78,7 @@
         <div class="level-legend" aria-label="Сложность вопросов"><span class="difficulty-1">Кубик 1–2 — <strong>Лёгкий</strong></span><span class="difficulty-2">Кубик 3–4 — <strong>Обычный</strong></span><span class="difficulty-3">Кубик 5–6 — <strong>Сложный</strong></span></div>
         <div class="generator-actions"><div class="field"><label for="count-select">Вопросов на каждый уровень каждого предмета</label>
           <select id="count-select"><option value="2" selected>2 (6 на предмет)</option><option value="4">4 (12 на предмет)</option><option value="6">6 (18 на предмет)</option><option value="10">10 (30 на предмет)</option><option value="22">22 (66 на предмет)</option></select></div>
-          <div class="generator-buttons"><button id="generate-btn" type="button" class="btn btn-generate-soft">Сформировать набор</button><button id="generate-game-btn" type="button" class="btn btn-generate-soft">Сформировать игру</button></div>
+          <div class="generator-buttons"><button id="generate-btn" type="button" class="btn btn-generate-soft btn-generate-icon"><span class="generate-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2.5 21.5 8 12 13.5 2.5 8 12 2.5Z"/><path d="m2.5 12.3 9.5 5.5 9.5-5.5"/><path d="m2.5 16.6 9.5 5.2 9.5-5.2"/></svg></span><span class="generate-btn-label">Сформировать набор</span></button><button id="generate-game-btn" type="button" class="btn btn-generate-soft btn-generate-icon"><span class="generate-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m12 2.5 9 5.1v9.8L12 22l-9-4.6V7.6l9-5.1Z"/><path d="m3 7.6 9 5.2 9-5.2M12 12.8V22"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="15.2" r="1" fill="currentColor" stroke="none"/><circle cx="16.2" cy="14.2" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="17.2" r="1" fill="currentColor" stroke="none"/></svg></span><span class="generate-btn-label">Сформировать игру</span></button></div>
         </div>
         <p class="muted-info">Полная игра содержит четыре комплекта. Выбранный источник используется для каждого предмета и уровня сложности.</p>
         <p id="generate-message" class="notice-error" role="status" aria-live="polite"></p>
@@ -110,6 +110,6 @@
 </div>
 <script src="js/common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
-<script src="js/library-v4.js?v=20261103-personal-topics"></script>
+<script src="js/library-v4.js?v=20261105-generate-icons"></script>
 </body>
 </html>
