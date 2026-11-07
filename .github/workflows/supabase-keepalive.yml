@@ -1,0 +1,38 @@
+name: Supabase daily activity check
+
+on:
+  schedule:
+    - cron: '17 5,13,21 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-database:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read public subject from Supabase
+        env:
+          SUPABASE_URL: https://jkrjxviduubqbikuycte.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_PUBLISHABLE_KEY}" ]; then
+            echo "::error::Add SUPABASE_PUBLISHABLE_KEY in repository Actions secrets."
+            exit 1
+          fi
+          curl --fail-with-body --silent --show-error --retry 2 --max-time 20 \
+            -H "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_PUBLISHABLE_KEY}" \
+            "${SUPABASE_URL}/rest/v1/subjects?select=slug&limit=1" \
+            -o /tmp/supabase-response.json
+          python3 - <<'PY'
+          import json
+          with open("/tmp/supabase-response.json", encoding="utf-8") as f:
+              data = json.load(f)
+          if not isinstance(data, list) or not data or "slug" not in data[0]:
+              raise SystemExit("Unexpected response: public subjects not returned")
+          print("Supabase database read succeeded")
+          PY
