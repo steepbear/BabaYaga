@@ -16,16 +16,11 @@ jobs:
       - name: Read public subject from Supabase
         env:
           SUPABASE_URL: https://jkrjxviduubqbikuycte.supabase.co
-          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ks8aQQQoe-cWXRo6b947cw_bYzTiBcZ
         run: |
           set -euo pipefail
-          if [ -z "${SUPABASE_PUBLISHABLE_KEY}" ]; then
-            echo "::error::Add SUPABASE_PUBLISHABLE_KEY in repository Actions secrets."
-            exit 1
-          fi
           curl --fail-with-body --silent --show-error --retry 2 --max-time 20 \
             -H "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_PUBLISHABLE_KEY}" \
             "${SUPABASE_URL}/rest/v1/subjects?select=slug&limit=1" \
             -o /tmp/supabase-response.json
           python3 - <<'PY'
